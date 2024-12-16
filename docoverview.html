@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!--AUnwanted-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a.js - Modular, Reactive, Empowering</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css">
+<link rel="stylesheet" href="css/styles.css">
+<script a-extension src="a-spaext.js"></script>
+<script src="importa.js"></script>
+</head>
+<body>
+	<layout>
+<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+	</layout>
+<!--/AUnwanted-->
+<my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
+   <div class="container">
+        <h1>a.js Documentation</h1>
+        <p>Welcome to the documentation for <strong>a.js</strong>, a lightweight JavaScript flexwork designed to empower developers with flexibility and transparency. This guide will walk you through the core concepts, features, and best practices of a.js.</p>
+
+        <h2>Getting Started</h2>
+        <p><strong>a.js</strong> is easy to integrate into your projects. Follow these steps to get started:</p>
+
+        <h3>1. Add a.js to Your Project</h3>
+        <p>Include the a.js script in your HTML file:</p>
+        <pre id="code1"><code>&lt;script src="path/to/a.js"&gt;&lt;/script&gt;</code></pre>
+        <button class="pure-button" onclick="copyCode(this, 'code1')">Copy</button>
+        <p>Replace <code>path/to/a.js</code> with the actual path to the a.js file in your project.</p>
+
+        <h3>2. Your First a.js Script</h3>
+        <p>Create a basic a.js script using the <code>&lt;a-closure&gt;</code> tag. For example:</p>
+        <pre id="code2"><code>&lt;div&gt;
+    &lt;a-closure&gt;
+        &lt;let&gt;
+            global watched g.message
+        &lt;/let&gt;
+        g.message = "Hello, a.js!";
+        {(&lt;strong&gt;${g.message}&lt;/strong&gt;)}
+    &lt;/a-closure&gt;
+&lt;/div&gt;</code></pre>
+        <button class="pure-button" onclick="copyCode(this, 'code2')">Copy</button>
+        <p>This script declares a reactive variable <code>g.message</code> and renders it dynamically in the DOM.</p>
+
+        <h3>3. Key Concepts in a.js</h3>
+        <ul>
+            <li><strong>Custom Elements</strong>: Use tags like <code>&lt;a-tagDef&gt;</code> and <code>&lt;a-closure&gt;</code> to define and manage components.</li>
+            <li><strong>Reactive Variables</strong>: Automatically update the DOM when variables change using <code>watched</code> variables.</li>
+            <li><strong>Dynamic Templates</strong>: Use JSX-like syntax to dynamically generate HTML elements.</li>
+        </ul>
+
+        <h3>4. Learn as You Build</h3>
+        <p>Start by experimenting with the examples in this guide, and refer to the sections below for deeper insights into specific features and functionalities.</p>
+
+        <div class="note">
+            <strong>Tip:</strong> You can mix a.js functionality with standard JavaScript and HTML seamlessly, giving you full control over your application.
+        </div>
+        
+        <h2>Core Concepts</h2>
+<p>In this section, we explore the core concepts of <strong>a.js</strong>, starting with the building blocks that make it powerful and flexible.</p>
+
+<h3>Custom Elements and &lt;a-tagDef&gt;</h3>
+<p>At the heart of <strong>a.js</strong> is the ability to create and manage custom HTML elements with ease. The <code>&lt;a-tagDef&gt;</code> tag allows you to define reusable components with minimal effort. Here's a simple example:</p>
+<pre id="code3"><code>&lt;a-tagDef fortag="my-button"&gt;
+    {(&lt;button&gt;Click Me!&lt;/button&gt;)}
+&lt;/a-tagDef&gt;
+&lt;my-button&gt;&lt;/my-button&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code3')">Copy</button>
+<p>In this example, <code>&lt;my-button&gt;</code> becomes a custom tag that renders a button element. You can use this tag anywhere in your HTML.</p>
+
+<h3>Template Literals and JSX-like Syntax</h3>
+<p>To make your custom elements dynamic, <strong>a.js</strong> leverages JavaScript template literals, which allow you to embed dynamic content. For example:</p>
+<pre id="code4"><code>&lt;a-tagDef fortag="interactive-message"&gt;
+    &lt;let&gt;
+        global watched g.text
+    &lt;/let&gt;
+    g.text = "Hello, Dynamic World!";
+
+    function updateMessage() {
+        g.text = "Message Updated!";
+    }
+
+    {(&lt;div&gt;
+        &lt;p&gt;${g.text}&lt;/p&gt;
+        &lt;button onclick="updateMessage()"&gt;Update Message&lt;/button&gt;
+    &lt;/div&gt;)}
+&lt;/a-tagDef&gt;
+&lt;interactive-message&gt;&lt;/interactive-message&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code4')">Copy</button>
+<p>This example demonstrates how to:</p>
+<ul>
+    <li>Declare a <code>watched</code> variable, <code>g.text</code>, to make it reactive.</li>
+    <li>Update the variable through a button click using the <code>updateMessage</code> function.</li>
+    <li>Automatically reflect changes to <code>g.text</code> in the DOM, showcasing reactivity.</li>
+</ul>
+<p>When you click the button, the text in the paragraph will change instantly without the need for manually updating the DOM. This is the power of reactivity in <strong>a.js</strong>.</p>
+
+<div class="note">
+    <strong>Tip:</strong> Use <code>&lt;a:tag&gt;</code> to avoid potential conflicts with native HTML tags when using template literals.
+</div>
+
+<h2>Reactivity</h2>
+<p>Reactivity is a core feature of <strong>a.js</strong>, enabling automatic updates to the DOM when variables change. This is achieved through the use of <code>watched</code> variables. In this section, we delve deeper into how reactivity works.</p>
+
+<h3>What Are Watched Variables?</h3>
+<p>Watched variables are special variables that <strong>a.js</strong> observes for changes. When their values are updated, any part of the DOM that depends on them is automatically refreshed. This eliminates the need for manual DOM manipulation.</p>
+
+<h3>Declaring Watched Variables</h3>
+<p>Watched variables are declared using the <code>watched</code> keyword inside a <code>&lt;let&gt;</code> block. For example:</p>
+<pre id="code5"><code>&lt;a-closure&gt;
+    &lt;let&gt;
+        global watched g.counter
+    &lt;/let&gt;
+    g.counter = 0;
+&lt;/a-closure&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code5')">Copy</button>
+<p>This code initializes a <code>watched</code> variable, <code>g.counter</code>, with a value of <code>0</code>.</p>
+
+<h3>Using Watched Variables in the DOM</h3>
+<p>You can bind watched variables to the DOM using template literals. Here's an example:</p>
+<pre id="code6"><code>&lt;a-closure&gt;
+    &lt;let&gt;
+        global watched g.counter
+    &lt;/let&gt;
+    g.counter = 0;
+
+    function incrementCounter() {
+        g.counter++;
+    }
+
+    {(&lt;div&gt;
+        &lt;p&gt;Counter: ${g.counter}&lt;/p&gt;
+        &lt;button onclick="incrementCounter()"&gt;Increment&lt;/button&gt;
+    &lt;/div&gt;)}
+&lt;/a-closure&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code6')">Copy</button>
+<p>In this example:</p>
+<ul>
+    <li><code>g.counter</code> is displayed in a paragraph tag.</li>
+    <li>A button calls the <code>incrementCounter</code> function to update <code>g.counter</code>.</li>
+    <li>The paragraph is updated automatically whenever <code>g.counter</code> changes.</li>
+</ul>
+<p>When you click the button, the counter value increases and the DOM updates seamlessly.</p>
+
+<h3>Scope of Watched Variables</h3>
+<p>Watched variables can be scoped globally, to namespaces, or to a parent-child relationship. The scope is defined by the <code>namespace</code> attribute of the <code>&lt;a-closure&gt;</code> tag. For example:</p>
+<pre id="code7"><code>&lt;a-closure namespace="myNamespace"&gt;
+    &lt;let&gt;
+        nsGlobal watched g.counter
+    &lt;/let&gt;
+    g.counter = 10;
+&lt;/a-closure&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code7')">Copy</button>
+<p>This code declares a <code>watched</code> variable <code>g.counter</code> within the namespace <code>myNamespace</code>.</p>
+
+<h3>Types of <code>&lt;let&gt;</code> Declarations</h3>
+<p>The <code>&lt;let&gt;</code> block supports several keywords for declaring variables with specific scopes:</p>
+<ul>
+    <li><code>local</code>: Declares variables in the local context.</li>
+    <li><code>global</code>: Declares variables in the global context.</li>
+    <li><code>nsGlobal</code>: Declares variables in the current namespace defined by the <code>namespace</code> attribute of the <code>&lt;a-closure&gt;</code> tag.</li>
+    <li><code>dGlobal</code>: Declares variables in a parent <code>&lt;a-closure&gt;</code>'s scope.</li>
+    <li><code>aGlobal</code>: Accesses variables declared with <code>dGlobal</code> from descendant closures.</li>
+    <li><code>watched</code>: Makes variables reactive, updating the DOM automatically when their values change. Combine this with the previous keywords, like <code>local watched local.var</code></li>
+</ul>
+
+<div class="note">
+    <strong>Tip:</strong> Use namespaces or local scopes to avoid naming collisions and to manage state effectively in larger applications.
+</div>
+
+<h2>State Management</h2>
+<p>Managing application state effectively is critical in dynamic applications. <strong>a.js</strong> provides powerful tools to save, restore, and manipulate application states with minimal effort.</p>
+
+<h3>Saving Application State</h3>
+<p>With <strong>a.js</strong>, you can save the current state of your application using <code>A.dumpAllStates()</code>. This function captures all reactive states in the application.</p>
+<pre id="code8"><code>// Save the current state
+let savedState = A.dumpAllStates();</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code8')">Copy</button>
+<p>This returns a serialized string representing the current state of all watched variables and reactive contexts.</p>
+
+<h3>Restoring Application State</h3>
+<p>To restore a previously saved state, use <code>A.restoreAllStates(stateDump)</code>. This function takes a serialized state string as input and updates all watched variables to match the saved state.</p>
+<pre id="code9"><code>// Restore a previously saved state
+A.restoreAllStates(savedState);</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code9')">Copy</button>
+<p>Once the state is restored, the DOM automatically updates to reflect the restored values, demonstrating the seamless integration of reactivity and state management.</p>
+
+<h3>Practical Example</h3>
+<p>Here’s an improved example demonstrating state saving and restoration while ensuring that the application always has a meaningful state to revert to:</p>
+<pre id="code10"><code>&lt;a-closure&gt;
+    &lt;let&gt;
+        global watched g.text
+    &lt;/let&gt;
+    g.text = "Initial State";
+
+    let stateHistory = [A.dumpAllStates()];
+
+    function saveState() {
+        stateHistory.push(A.dumpAllStates());
+    }
+
+    function restoreState() {
+        if (stateHistory.length > 1) {
+            stateHistory.pop();
+            A.restoreAllStates(stateHistory[stateHistory.length - 1]);
+        }
+    }
+
+    function updateText() {
+        g.text = `Updated at ${new Date().toLocaleTimeString()}`;
+        saveState();
+    }
+
+    {(&lt;div&gt;
+        &lt;p&gt;${g.text}&lt;/p&gt;
+        &lt;button onclick="restoreState()"&gt;Undo&lt;/button&gt;
+        &lt;button onclick="updateText()"&gt;Update Text&lt;/button&gt;
+    &lt;/div&gt;)}
+&lt;/a-closure&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code10')">Copy</button>
+<p>In this example:</p>
+<ul>
+    <li>The application maintains a <code>stateHistory</code> array to store successive states.</li>
+    <li>The <code>Update Text</code> button updates <code>g.text</code> and automatically saves the new state.</li>
+    <li>The <code>Undo</code> button restores the previous state by removing the latest entry from <code>stateHistory</code>.</li>
+</ul>
+<p>With this approach, the application always has a meaningful state to revert to, ensuring a smooth user experience.</p>
+
+<div class="note">
+    <strong>Tip:</strong> Use state history to implement advanced features like multi-level undo/redo or state snapshots for debugging.</div>
+
+<h2>Advanced Features</h2>
+<p>The advanced features of <strong>a.js</strong> empower developers with dynamic tools for building flexible, high-performance applications. These features include scoped contexts, redefinable custom elements, and dynamic templates, allowing fine-grained control and customization.</p>
+
+<h3>Scoped Contexts</h3>
+<p>Scoped contexts help organize and manage application state, preventing naming collisions and ensuring variables are accessible only where needed. The <code>namespace</code> attribute of the <code>&lt;a-closure&gt;</code> tag defines the active namespace for variables declared within it.</p>
+<pre id="code11"><code>&lt;a-closure namespace="exampleNamespace"&gt;
+    &lt;let&gt;
+        nsGlobal watched g.message
+    &lt;/let&gt;
+    g.message = "Scoped to exampleNamespace";
+    {(&lt;p&gt;${g.message}&lt;/p&gt;)}
+&lt;/a-closure&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code11')">Copy</button>
+<p>Here, <code>g.message</code> belongs to the <code>exampleNamespace</code>, ensuring it does not conflict with similarly named variables in other contexts.</p>
+
+<h3>Redefinable Custom Elements</h3>
+<p>With <strong>a.js</strong>, you can redefine the behavior of custom elements dynamically. This feature is useful for updating components at runtime without needing a full reload.</p>
+<pre id="code12"><code>&lt;a-tagDef fortag="dynamic-element"&gt;
+    {(&lt;div&gt;Original Element&lt;/div&gt;)}
+&lt;/a-tagDef&gt;
+
+&lt;dynamic-element&gt;&lt;/dynamic-element&gt;
+
+&lt;script&gt;
+// Initially defined behavior
+setTimeout(() => {
+    // Redefine the behavior dynamically
+    A.tagDef({
+        fortag: "dynamic-element",
+        content: `{(&lt;div&gt;Redefined Element&lt;/div&gt;)}`
+    });
+    A.replayCustomTagsByName("dynamic-element");
+}, 3000); // Wait 3 seconds before redefinition
+&lt;/script&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code12')">Copy</button>
+<p>Initially, <code>&lt;dynamic-element&gt;</code> displays "Original Element." After 3 seconds, the component dynamically updates to "Redefined Element," showcasing runtime redefinition.</p>
+
+<h3>Dynamic Templates</h3>
+<p>Dynamic templates in <strong>a.js</strong> allow you to build responsive UIs that update seamlessly with changes to state or variables. Using template literals with reactive variables ensures efficient DOM updates.</p>
+<pre id="code13"><code>&lt;ul&gt;
+		&lt;a-closure&gt;
+			&lt;let&gt;
+				local watched g
+			&lt;/let&gt;
+			g.arr = [1,2,3,4,5]
+			let count = 6;
+			{(&lt;button onclick="g.arr.push(count++)"&gt;push&lt;/button&gt;)}
+
+			{(&lt;button onclick="g.arr[1]--"&gt;--&lt;/button&gt;)}
+			
+			{(&lt;button onclick="g.arr.pop()"&gt;pop&lt;/button&gt;)}
+			
+			{(&lt;button onclick="g.arr.shift()"&gt;shift&lt;/button&gt;)}
+			&lt;forEachOf g.arr="val"&gt;
+				{(&lt;li key="${forEach}"&gt;(${val}-${g.arr[forEach]})&lt;/li&gt;)}
+			&lt;/forEachOf&gt;
+		&lt;/a-closure&gt;
+&lt;/ul&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code13')">Copy</button>
+<p>In this example:</p>
+<ul>
+    <li>A <code>forEachOf</code> loop dynamically creates and appends <code>&lt;li&gt;</code> elements to a <code>&lt;ul&gt;</code> element as items are added to <code>g.arr</code>.</li>
+    <li>Clicking one of the buttons updates the reactive list, seamlessly reflecting the changes in the UI.</li>
+</ul>
+
+<div class="note">
+    <strong>Tip:</strong> Advanced features like scoped contexts and redefinable elements enable dynamic applications while maintaining modularity and reusability.
+</div>
+
+
+      <my-link><a href="docintro.html" class="pure-button pure-button-primary">> Introduction </a></my-link>  
+    </div>
+</my-page>
+<!--AUnwanted-->
+</body>
+</html>
+<!--/AUnwanted-->

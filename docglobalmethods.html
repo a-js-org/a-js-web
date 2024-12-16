@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--AUnwanted-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a.js - Modular, Reactive, Empowering</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css">
+<link rel="stylesheet" href="css/styles.css">
+<script a-extension src="a-spaext.js"></script>
+<script src="importa.js"></script>
+</head>
+<body>
+	<layout>
+<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+	</layout>
+<!--/AUnwanted-->
+<my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
+<h2 id="a-global-object-methods-and-functions"><code id="code90">A</code> Global Object Methods and Functions</h2>
+<h3 id="ainitialized"><code id="code91">A.initialized()</code></h3>
+<p>Returns a promise that resolves once a.js has fully initialized, including defining all <code id="code92">&lt;a-xxxx&gt;</code> tags.</p>
+<h4 id="syntax-5">Syntax:</h4>
+<pre><code class="language-javascript" id="code93">A.initialized().then(() =&gt; {
+  console.log('a.js is fully initialized.');
+});
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code93')">Copy</button>
+<h4 id="returns">Returns:</h4>
+<ul>
+<li><strong>Promise</strong>: Resolves when a.js is ready for use.</li>
+</ul>
+<hr>
+<h3 id="aallparsed"><code id="code94">A.allParsed()</code></h3>
+<p>Returns a promise that resolves once all <code id="code95">&lt;a-xxxx&gt;</code> elements present at initialization have been parsed.</p>
+<h4 id="syntax-6">Syntax:</h4>
+<pre><code class="language-javascript" id="code96">A.allParsed().then(() =&gt; {
+  console.log('All a-elements have been parsed.');
+});
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code96')">Copy</button>
+<h4 id="returns-1">Returns:</h4>
+<ul>
+<li><strong>Promise</strong>: Resolves when all <code id="code97">&lt;a-xxxx&gt;</code> elements are fully parsed.</li>
+</ul>
+<hr>
+<h3 id="awaituntilaparsedifexistselement"><code id="code98">A.waitUntilAParsedIfExists(element)</code></h3>
+<p>Waits for a specified element to be parsed if it exists. If the element does not exist, the promise resolves immediately.</p>
+<h4 id="parameters">Parameters:</h4>
+<ul>
+<li><strong><code id="code99">element</code></strong> (HTMLElement): The element to wait for.</li>
+</ul>
+<h4 id="returns-2">Returns:</h4>
+<ul>
+<li><strong>Promise</strong>: Resolves when the specified element has been parsed or if it does not exist.</li>
+</ul>
+<h4 id="syntax-7">Syntax:</h4>
+<pre><code class="language-javascript" id="code100">A.waitUntilAParsedIfExists(document.querySelector('my-element')).then(() =&gt; {
+  console.log('my-element parsed or does not exist.');
+});
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code100')">Copy</button>
+<hr>
+<h3 id="adumpallstates"><code id="code101">A.dumpAllStates()</code></h3>
+<p>Dumps all <code id="code102">&lt;let&gt;</code> variable states into a JSON string. This is useful for persisting the application state.</p>
+<h4 id="returns-3">Returns:</h4>
+<ul>
+<li><strong>String</strong>: A JSON string representing the current state of all <code id="code103">&lt;let&gt;</code> variables.</li>
+</ul>
+<h4 id="syntax-8">Syntax:</h4>
+<pre><code class="language-javascript" id="code104">const stateDump = A.dumpAllStates();
+console.log(stateDump);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code104')">Copy</button>
+<hr>
+<h3 id="arestoreallstatesdump"><code id="code105">A.restoreAllStates(dump)</code></h3>
+<p>Restores <code id="code106">&lt;let&gt;</code> variable states from a previously dumped state string.</p>
+<h4 id="parameters-1">Parameters:</h4>
+<ul>
+<li><strong><code id="code107">dump</code></strong> (String): The JSON string returned by <code id="code108">A.dumpAllStates</code>.</li>
+</ul>
+<h4 id="syntax-9">Syntax:</h4>
+<pre><code class="language-javascript" id="code109">A.restoreAllStates(stateDump);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code109')">Copy</button>
+<h4 id="behavior-2">Behavior:</h4>
+<ul>
+<li>Reinstates the values of variables defined in <code id="code110">&lt;let&gt;</code> tags.</li>
+<li>Handles scope-specific variables using the HTML tree structure.</li>
+</ul>
+<hr>
+<h3 id="aimportinelem-url-type-removeafterimport-onloaded"><code id="code111">A.importIn(elem, url[, type][, removeAfterImport][, onloaded])</code></h3>
+<p>Imports content from the specified <code id="code112">url</code> into the given element <code id="code113">elem</code> by creating an <code id="code114">&lt;a-closure&gt;&lt;import&gt;</code> in it. This can dynamically load HTML, CSS, JavaScript, or other resources.</p>
+<h4 id="parameters-2">Parameters:</h4>
+<ul>
+<li><strong><code id="code115">elem</code></strong> (HTMLElement): The target element for the imported content.</li>
+<li><strong><code id="code116">url</code></strong> (String): The URL to import from.</li>
+<li><strong><code id="code117">type</code></strong> (String, optional): The type of content to import. Defaults to <code id="code118">text/html</code>. Other valid values include <code id="code119">css</code>, <code id="code120">javascript</code>, <code id="code121">json</code>.</li>
+<li><strong><code id="code122">removeAfterImport</code></strong> (Boolean, optional): If <code id="code123">true</code>, removes the <code id="code124">&lt;a-closure&gt;</code> tag after execution. Defaults to <code id="code125">true</code>.</li>
+<li><strong><code id="code126">onloaded</code></strong> (Function, optional): A callback function executed after the import is complete.</li>
+</ul>
+<h4 id="syntax-10">Syntax:</h4>
+<pre><code class="language-javascript" id="code127">A.importIn(currentElement, './fragment.html', 'html', true, () =&gt; {
+  console.log('Import completed.');
+});
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code127')">Copy</button>
+<hr>
+<h3 id="agetorcreatekeyedelementtagname-key-htmlelement-namespace"><code id="code128">A.getOrCreateKeyedElement(tagName, key, htmlElement[, namespace])</code></h3>
+<p>Retrieves or creates a keyed element associated with the provided <code id="code129">key</code>.</p>
+<h4 id="parameters-3">Parameters:</h4>
+<ul>
+<li><strong><code id="code130">tagName</code></strong> (String): The tag name of the element to create.</li>
+<li><strong><code id="code131">key</code></strong> (String): A unique identifier for the element.</li>
+<li><strong><code id="code132">htmlElement</code></strong> (HTMLElement): The parent element.</li>
+<li><strong><code id="code133">namespace</code></strong> (String, optional): A namespace for the key.</li>
+</ul>
+<h4 id="returns-4">Returns:</h4>
+<ul>
+<li><strong>HTMLElement</strong>: The created or retrieved keyed element.</li>
+</ul>
+<h4 id="syntax-11">Syntax:</h4>
+<pre><code class="language-javascript" id="code134">const keyedElem = A.getOrCreateKeyedElement('div', 'unique-key', document.body);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code134')">Copy</button>
+<hr>
+<h3 id="aremovekeyedelementkey-htmlelement-namespace"><code id="code135">A.removeKeyedElement(key, htmlElement[, namespace])</code></h3>
+<p>Removes a keyed element from the DOM and deletes its key association.</p>
+<h4 id="parameters-4">Parameters:</h4>
+<ul>
+<li><strong><code id="code136">key</code></strong> (String): The unique identifier of the element.</li>
+<li><strong><code id="code137">htmlElement</code></strong> (HTMLElement): The parent element.</li>
+<li><strong><code id="code138">namespace</code></strong> (String, optional): A namespace for the key.</li>
+</ul>
+<h4 id="returns-5">Returns:</h4>
+<ul>
+<li><strong>HTMLElement</strong>: The removed element, if it exists.</li>
+</ul>
+<h4 id="syntax-12">Syntax:</h4>
+<pre><code class="language-javascript" id="code139">A.removeKeyedElement('unique-key', document.body);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code139')">Copy</button>
+<hr>
+<h3 id="agetallkeyedelementskeysarrayhtmlelement-namespace"><code id="code140">A.getAllKeyedElementsKeysArray(htmlElement[, namespace])</code></h3>
+<p>Retrieves an array of all keys associated with a specific element and namespace.</p>
+<h4 id="parameters-5">Parameters:</h4>
+<ul>
+<li><strong><code id="code141">htmlElement</code></strong> (HTMLElement): The parent element.</li>
+<li><strong><code id="code142">namespace</code></strong> (String, optional): A namespace for the keys.</li>
+</ul>
+<h4 id="returns-6">Returns:</h4>
+<ul>
+<li><strong>Array</strong>: An array of keys.</li>
+</ul>
+<h4 id="syntax-13">Syntax:</h4>
+<pre><code class="language-javascript" id="code143">const keys = A.getAllKeyedElementsKeysArray(document.body);
+console.log(keys);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code143')">Copy</button>
+<hr>
+<h3 id="agetallkeyedelementskeyssethtmlelement-namespace"><code id="code144">A.getAllKeyedElementsKeysSet(htmlElement[, namespace])</code></h3>
+<p>Retrieves an array of all keys associated with a specific element and namespace.</p>
+<h4 id="parameters-6">Parameters:</h4>
+<ul>
+<li><strong><code id="code145">htmlElement</code></strong> (HTMLElement): The parent element.</li>
+<li><strong><code id="code146">namespace</code></strong> (String, optional): A namespace for the keys.</li>
+</ul>
+<h4 id="returns-7">Returns:</h4>
+<ul>
+<li><strong>Set</strong>: A Set of keys.</li>
+</ul>
+<h4 id="syntax-14">Syntax:</h4>
+<pre><code class="language-javascript" id="code147">const keys = A.getAllKeyedElementsKeysArray(document.body);
+console.log(keys);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code147')">Copy</button>
+<hr>
+<h3 id="agetallkeyedelementskeysobjecthtmlelement-namespace"><code id="code148">A.getAllKeyedElementsKeysObject(htmlElement[, namespace])</code></h3>
+<p>Retrieves an array of all keys associated with a specific element and namespace.</p>
+<h4 id="parameters-7">Parameters:</h4>
+<ul>
+<li><strong><code id="code149">htmlElement</code></strong> (HTMLElement): The parent element.</li>
+<li><strong><code id="code150">namespace</code></strong> (String, optional): A namespace for the keys.</li>
+</ul>
+<h4 id="returns-8">Returns:</h4>
+<ul>
+<li><strong>Object</strong>: An object { key : true} of keys.</li>
+</ul>
+<h4 id="syntax-15">Syntax:</h4>
+<pre><code class="language-javascript" id="code151">const keys = A.getAllKeyedElementsKeysArray(document.body);
+console.log(keys);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code151')">Copy</button>
+<hr>
+<h3 id="aupdateobjecttarget-source"><code id="code152">A.updateObject(target, source)</code></h3>
+<p>Merges the properties of the <code id="code153">source</code> object into the <code id="code154">target</code> object. Only differing properties are updated.</p>
+<h4 id="parameters-8">Parameters:</h4>
+<ul>
+<li><strong><code id="code155">target</code></strong> (Object): The object to be updated.</li>
+<li><strong><code id="code156">source</code></strong> (Object): The object providing new values.</li>
+</ul>
+<h4 id="returns-9">Returns:</h4>
+<ul>
+<li><strong>void</strong></li>
+</ul>
+<h4 id="syntax-16">Syntax:</h4>
+<pre><code class="language-javascript" id="code157">let target = { a: 1, b: 2 };
+let source = { b: 3, c: 4 };
+A.updateObject(target, source);
+console.log(target); // { a: 1, b: 3, c: 4 }
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code157')">Copy</button>
+<hr>
+<h3 id="agetjsonpathobj-tpath-value"><code id="code158">A.getJSONPath(obj, tpath[, value])</code></h3>
+<p>Retrieves or sets a value in an object or array using a JSON path.</p>
+<h4 id="parameters-9">Parameters:</h4>
+<ul>
+<li><strong><code id="code159">obj</code></strong> (Object | Array): The target object or array.</li>
+<li><strong><code id="code160">tpath</code></strong> (String): The JSON path.</li>
+<li><strong><code id="code161">value</code></strong> (Any, optional): The value to set at the specified path.</li>
+</ul>
+<h4 id="returns-10">Returns:</h4>
+<ul>
+<li><strong>Any</strong>: The value at the specified path, or the updated object.</li>
+</ul>
+<h4 id="syntax-17">Syntax:</h4>
+<pre><code class="language-javascript" id="code162">let data = { a: { b: [1, 2, 3] } };
+const value = A.getJSONPath(data, 'a.b.1');
+console.log(value); // value is 2 =&gt; logs 2
+
+A.getJSONPath(data, 'a.b.1', 42);
+console.log(data); // data has been modified =&gt; logs { a: { b: [1, 42, 3] } }
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code162')">Copy</button>
+<hr>
+<h3 id="agetnonatextcontentelement"><code id="code163">A.getNonATextContent(element)</code></h3>
+<p>Retrieves the content of an element, excluding everything that is an a-element or inside one.</p>
+<h4 id="parameters-10">Parameters:</h4>
+<ul>
+<li><strong><code id="code164">element</code></strong> (HTMLElement): The element whose text content is to be retrieved.</li>
+</ul>
+<h4 id="returns-11">Returns:</h4>
+<ul>
+<li><strong>String</strong>: The plain text content of the element.</li>
+</ul>
+<h4 id="syntax-18">Syntax:</h4>
+<pre><code class="language-javascript" id="code165">const text = A.getNonATextContent(document.querySelector('my-element'));
+console.log(text);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code165')">Copy</button>
+<hr>
+<h3 id="agettextcontentelement"><code id="code166">A.getTextContent(element)</code></h3>
+<p>Retrieves the content of an element, including content inside <code id="code167">&lt;a-xxxx&gt;</code> elements but removes any <code id="code168">&lt;script type="a/unparsed"&gt;</code> and the corresponding closing tag.</p>
+<h4 id="parameters-11">Parameters:</h4>
+<ul>
+<li><strong><code id="code169">element</code></strong> (HTMLElement): The element whose text content is to be retrieved.</li>
+</ul>
+<h4 id="returns-12">Returns:</h4>
+<ul>
+<li><strong>String</strong>: The text content of the element, including content from a.js elements.</li>
+</ul>
+<h4 id="syntax-19">Syntax:</h4>
+<pre><code class="language-javascript" id="code170">const text = A.getTextContent(document.querySelector('my-element'));
+console.log(text);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code170')">Copy</button>
+<hr>
+<h3 id="agetsourcecontentelement"><code id="code171">A.getSourceContent(element)</code></h3>
+<p>Retrieves the content of an element, as it would appear when explored in the browser developer tools Elements tab.</p>
+<h4 id="parameters-12">Parameters:</h4>
+<ul>
+<li><strong><code id="code172">element</code></strong> (HTMLElement): The element whose source content is to be retrieved.</li>
+</ul>
+<h4 id="returns-13">Returns:</h4>
+<ul>
+<li><strong>String</strong>: The raw HTML content of the element.</li>
+</ul>
+<h4 id="syntax-20">Syntax:</h4>
+<pre><code class="language-javascript" id="code173">const source = A.getSourceContent(document.querySelector('my-element'));
+console.log(source);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code173')">Copy</button>
+<hr>
+<my-link><a href="docscopedvars.html" class="pure-button pure-button-primary">> Scoped variables</a></my-link> 
+</my-page>
+<!--AUnwanted-->
+</body>
+</html>
+<!--/AUnwanted-->

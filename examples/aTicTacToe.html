@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="../a.js">addSourceMaps:true</script>
+<style type="text/css">
+my-square {   /*style the my-square tag to have it display as a square*/
+	 height:40px;
+	 width:40px;
+	 border:1px solid black;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 36px;
+}
+</style>
+<a-tagDef fortag="my-board">/*Starts a definition for a custom tag named my-board*/
+	/*declares board and state as reactive objects that will be avaiblable to custom tags inside a my-board tag*/
+	<let>
+		dGlobal watched board, state 
+	</let>
+	board.squares = [["","",""],["","",""],["","",""]]  /*initialize a 3x3 grid inside the reactive board object*/
+	state.player1 = true;   /*initialize reactive state data*/
+	state.hasWinner = false;
+	
+	function calculateWinner(pushstate) {  /*function that implements the Tic Tac Toe winning rules, set messages on screen, and update history so you can go back and forth in the game using the browser navigation*/
+		let isWinner;
+		/*start of winning conditions tests*/
+		for (let i=0;i<3;i++) {
+			if (board.squares[i][0]&&board.squares[i][0]==board.squares[i][1]&&board.squares[i][0]==board.squares[i][2]) {
+				isWinner = board.squares[i][0]
+			}
+			if (board.squares[0][i]&&board.squares[0][i]==board.squares[1][i]&&board.squares[0][i]==board.squares[2][i]) {
+				isWinner = board.squares[0][i]
+			}
+		}
+		if (board.squares[0][0]&&board.squares[0][0]==board.squares[1][1]&&board.squares[0][0]==board.squares[2][2]) {
+			isWinner = board.squares[0][0]
+		}
+		if (board.squares[0][2]&&board.squares[0][2]==board.squares[1][1]&&board.squares[0][2]==board.squares[2][0]) {
+			isWinner = board.squares[0][2]
+		}
+		/*end of winning conditions tests*/
+		if (isWinner) { /*when there is a winner, update the message (which, by reaction, will update the UI), and the state*/
+			board.msg = "Winner: " + isWinner
+			state.hasWinner = true;
+		} else { /*when there is no winner so far, update the message o display who the next player is*/
+			board.msg = "Next player: " + (state.player1 ? "X" : "O")
+		}
+		let str = A.dumpAllStates();  /*Save all components states in str*/
+		if (pushstate!==false) {
+			history.pushState(str, "", document.location.href); /*save str in browser history*/
+		}
+		return isWinner;
+	}
+	expose(calculateWinner)  /*make the calculateWinner function available in the currentElement a.js namespace (A)*/
+	calculateWinner(false);
+	{(<strong>${board.msg}</strong>)}
+</a-tagDef>
+<a-tagDef fortag="my-square">/*Starts a definition for a custom tag named my-square*/
+	/*define board and state as being herited from the closest ancestor defining them (this will be a my-board tag here)*/
+	<let>
+		aGlobal watched board  
+		aGlobal watched state
+	</let>
+	let line = currentElement.getAttribute("line")  /*retrieve line and col from the attributes of the my-square tag*/
+	let col = currentElement.getAttribute("col")
+	function handleClick() {                        /*create a (listener) function for clicks on the my-square tag*/
+		if (state.hasWinner||board.squares[line][col]!="") return;  /*do nothing if there is a winner or the corresponding board square already is set*/
+		if (state.player1) {   /*otherwise set the board square to a value of X or O depending on the player turn. This, by reaction, will update the UI*/
+			board.squares[line][col] = "X"
+		} else {
+			board.squares[line][col] = "O"
+		}
+		state.player1 = !state.player1;  /*change player*/
+		currentElement.parentElement.A.calculateWinner(); /*test if there is a winner*/
+	}	
+	currentElement.addEventListener("click",handleClick)  /*set the handler on my-square*/
+	{(<strong>${board.squares[line][col]}</strong>)}  /*append a reactive UI element on my-square, using the javascript template literal notaion ${} (the part between the {} is evaluated in the contexte of my-square declaration, and will be reactive since it uses a watched variable)*/ 
+</a-tagDef>
+<title>a.js Tic Tac Toe demo</title>
+</head>
+<body>
+	<script> 
+		A.allParsed().then(()=>{ //initialize history when the components are ready
+			let str = A.dumpAllStates();
+			history.replaceState(str, "", document.location.href);
+		})
+		window.addEventListener("popstate", (event) => {  //manage the browser navigation in the history
+		  if (event.state) {
+		    A.restoreAllStates(event.state)
+		  }
+		});
+	</script>
+	You can play several games at once:<br>
+<my-board>
+	<my-square line="0" col="0"></my-square><my-square line="0" col="1"></my-square><my-square line="0" col="2"></my-square><br>
+	<my-square line="1" col="0"></my-square><my-square line="1" col="1"></my-square><my-square line="1" col="2"></my-square><br>
+	<my-square line="2" col="0"></my-square><my-square line="2" col="1"></my-square><my-square line="2" col="2"></my-square><br>
+</my-board>
+<br><br><br>
+<my-board>
+	<my-square line="0" col="0"></my-square><my-square line="0" col="1"></my-square><my-square line="0" col="2"></my-square><br>
+	<my-square line="1" col="0"></my-square><my-square line="1" col="1"></my-square><my-square line="1" col="2"></my-square><br>
+	<my-square line="2" col="0"></my-square><my-square line="2" col="1"></my-square><my-square line="2" col="2"></my-square><br>
+</my-board>
+</body>
+</html>

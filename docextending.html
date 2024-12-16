@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--AUnwanted-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a.js - Modular, Reactive, Empowering</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css">
+<link rel="stylesheet" href="css/styles.css">
+<script a-extension src="a-spaext.js"></script>
+<script src="importa.js"></script>
+</head>
+<body>
+	<layout>
+<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+	</layout>
+<!--/AUnwanted-->
+<my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
+<h1 id="extending-and-adapting-ajs">Extending and Adapting a.js</h1>
+<p>The extension system in a.js allows developers to define custom behaviors, inject new functionalities, and override existing ones. It offers flexibility for advanced customization while maintaining the reactive and modular nature of a.js.</p>
+<hr>
+<h2 id="extensions-with-script-a-extension"><strong>Extensions with <code id="code301">&lt;script a-extension&gt;</code></strong></h2>
+<h3 id="description-5">Description:</h3>
+<p>The <code id="code302">&lt;script a-extension&gt;</code> tag is used to define extensions in a.js. These extensions allow developers to add, replace, or inject functions into the <code id="code303">A</code> global object or any custom tags defined in a.js.</p>
+<h3 id="syntax-26">Syntax:</h3>
+<pre><code class="language-html" id="code304">&lt;script a-extension&gt;
+  // Define or override functions here
+&lt;/script&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code304')">Copy</button>
+<h3 id="behavior-6">Behavior:</h3>
+<ol>
+<li>Extensions are processed during the initialization phase of a.js.</li>
+<li>The script tag is associated with an <code id="code305">_AExtension</code> object containing extension-specific properties and tasks.</li>
+</ol>
+<h4 id="example-32">Example:</h4>
+<pre><code class="language-html" id="code306">&lt;script a-extension&gt;
+  function f(elem) {
+    let src = A.getSourceContent(elem).txt;
+    console.log(src);
+  }
+  document.currentScript._AExtension = {
+    AParsedTagsTasks: [
+      { selector: "console", function: f }
+    ]
+  };
+&lt;/script&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code306')">Copy</button>
+<hr>
+<h2 id="aextend-object"><strong><code id="code307">A.extend</code> Object</strong></h2>
+<p>The <code id="code308">A.extend</code> object provides methods to add or override internal functions in a.js during an extension's execution.</p>
+<h3 id="addinitwaitpromise"><strong><code id="code309">addInitWait(promise)</code></strong></h3>
+<p>Adds a promise to the initialization process, ensuring specific tasks are completed before a.js is considered fully initialized.</p>
+<h4 id="parameters-13">Parameters:</h4>
+<ul>
+<li><strong><code id="code310">promise</code></strong> (Promise): A promise that must resolve before initialization completes.</li>
+</ul>
+<h4 id="example-33">Example:</h4>
+<pre><code class="language-javascript" id="code311">A.extend.addInitWait(new Promise((resolve) =&gt; setTimeout(resolve, 1000)));
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code311')">Copy</button>
+<hr>
+<h3 id="getinternalfunctionafunctionname"><strong><code id="code312">getInternalFunction(AFunctionName)</code></strong></h3>
+<p>Retrieves the internal implementation of an existing function.</p>
+<h4 id="parameters-14">Parameters:</h4>
+<ul>
+<li><strong><code id="code313">AFunctionName</code></strong> (String): The name of the function to retrieve.</li>
+</ul>
+<h4 id="returns-14">Returns:</h4>
+<ul>
+<li><strong>Function</strong>: The internal implementation of the function.</li>
+</ul>
+<h4 id="example-34">Example:</h4>
+<pre><code class="language-javascript" id="code314">const getJSONPath = A.extend.getInternalFunction("getJSONPath");
+console.log(getJSONPath);
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code314')">Copy</button>
+<hr>
+<h3 id="replaceinternalfunctionafunctionname-newfunction"><strong><code id="code315">replaceInternalFunction(AFunctionName, newFunction)</code></strong></h3>
+<p>Replaces an existing internal function with a new implementation.</p>
+<h4 id="parameters-15">Parameters:</h4>
+<ul>
+<li><strong><code id="code316">AFunctionName</code></strong> (String): The name of the function to replace.</li>
+<li><strong><code id="code317">newFunction</code></strong> (Function): The new implementation of the function.</li>
+</ul>
+<h4 id="example-35">Example:</h4>
+<pre><code class="language-javascript" id="code318">A.extend.replaceInternalFunction("getJSONPath", function (obj, path) {
+  console.log("Custom behavior");
+  return path.split(".").reduce((o, p) =&gt; o &amp;&amp; o[p], obj);
+});
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code318')">Copy</button>
+<hr>
+<h3 id="addinternalfunctionafunctionname-newfunction"><strong><code id="code319">addInternalFunction(AFunctionName, newFunction)</code></strong></h3>
+<p>Adds a new internal function to a.js.</p>
+<h4 id="parameters-16">Parameters:</h4>
+<ul>
+<li><strong><code id="code320">AFunctionName</code></strong> (String): The name of the new function to add.</li>
+<li><strong><code id="code321">newFunction</code></strong> (Function): The implementation of the new function.</li>
+</ul>
+<h4 id="returns-15">Returns:</h4>
+<ul>
+<li><strong>Function</strong>: The added function.</li>
+</ul>
+<h4 id="example-36">Example:</h4>
+<pre><code class="language-javascript" id="code322">const newFunc = A.extend.addInternalFunction("myNewFunction", () =&gt; {
+  console.log("This is a new function.");
+});
+newFunc();
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code322')">Copy</button>
+<hr>
+<h2 id="using-_aextension"><strong>Using <code id="code323">_AExtension</code></strong></h2>
+<p>The <code id="code324">_AExtension</code> object in an extension script can define tasks that are executed when custom tags are parsed.</p>
+<h3 id="aparsedtagstasks"><strong><code id="code325">AParsedTagsTasks</code></strong></h3>
+<h4 id="description-6">Description:</h4>
+<p>The <code id="code326">AParsedTagsTasks</code> property defines tasks to execute for specific tags when they are parsed.</p>
+<h4 id="properties">Properties:</h4>
+<ul>
+<li><strong><code id="code327">selector</code></strong> (String): A CSS selector to match specific tags.</li>
+<li><strong><code id="code328">function</code></strong> (Function): A function to execute for each matched tag.</li>
+</ul>
+<h4 id="example-37">Example:</h4>
+<pre><code class="language-javascript" id="code329">function logSourceContent(elem) {
+  const src = A.getSourceContent(elem).txt;
+  console.log("Source content:", src);
+}
+
+document.currentScript._AExtension = {
+  AParsedTagsTasks: [
+    { selector: "console", function: logSourceContent }
+  ]
+};
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code329')">Copy</button>
+<hr>
+<h3 id="postimportfetchtasks"><strong><code id="code330">PostImportFetchTasks</code></strong></h3>
+<h4 id="description-7">Description:</h4>
+<p>The <code id="code331">PostImportFetchTasks</code> property in <code id="code332">_AExtension</code> allows developers to process imported content after it has been fetched and before it is parsed or rendered.</p>
+<h4 id="properties-1">Properties:</h4>
+<ul>
+<li><strong><code id="code333">function</code></strong> (Function): A function to process the fetched content.<ul>
+<li>The function receives the raw content as input.</li>
+<li>The returned value should include the modified content.</li>
+</ul>
+</li>
+</ul>
+<h4 id="example-38">Example:</h4>
+<pre><code class="language-javascript" id="code334">function cleanUnwantedTags(txt) {
+  if (txt.startsWith("&lt;!DOCTYPE ")) {
+    let pos = txt.indexOf("&gt;");
+    txt = txt.substring(pos + 1);
+  }
+  let re = /&lt;!--AUnwanted--&gt;.*?&lt;!--\/AUnwanted--&gt;/gims;
+  txt = txt.replace(re, "");
+  return { txt };
+}
+
+document.currentScript._AExtension = {
+  PostImportFetchTasks: [
+    { function: cleanUnwantedTags }
+  ]
+};
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code334')">Copy</button>
+<hr>
+<h3 id="tagcreationtasks"><strong><code id="code335">TagCreationTasks</code></strong></h3>
+<h4 id="description-8">Description:</h4>
+<p>The <code id="code336">TagCreationTasks</code> property defines tasks that modify or initialize elements as they are created.</p>
+<h4 id="properties-2">Properties:</h4>
+<ul>
+<li><strong><code id="code337">selector</code></strong> (String): A CSS selector to identify target tags.</li>
+<li><strong><code id="code338">function</code></strong> (Function): A function executed during tag creation. This function can modify the tag's behavior or properties.</li>
+</ul>
+<h4 id="example-39">Example:</h4>
+<pre><code class="language-javascript" id="code339">function initializeCustomTag(element) {
+  element.setAttribute("initialized", "true");
+  console.log("Tag initialized:", element.tagName);
+}
+
+document.currentScript._AExtension = {
+  TagCreationTasks: [
+    { selector: "custom-element", function: initializeCustomTag }
+  ]
+};
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code339')">Copy</button>
+<hr>
+<h2 id="adapting-default-configurations"><strong>Adapting Default Configurations</strong></h2>
+<h3 id="aconfig-object"><strong><code id="code340">AConfig</code> Object</strong></h3>
+<p>The <code id="code341">AConfig</code> object allows for overriding default behaviors and settings in a.js.</p>
+<h4 id="modifiable-properties">Modifiable Properties:</h4>
+<ul>
+<li><strong><code>AObjectNames/AObjectName</code></strong> (String/Array of strings): Change the global A object name.</li>
+<li><strong><code id="code342">addSourceMaps</code></strong> (Boolean): Adds source maps for debugging.</li>
+<li><strong><code id="code343">keepCustomTagsInitState</code></strong> (Boolean): Preserves the initialization state of custom tags.</li>
+<li><strong><code id="code344">noAExtend</code></strong> (Boolean): Disables the <code id="code345">A.extend</code> object if <code id="code346">true</code>.</li>
+</ul>
+<h4 id="example-40">Example:</h4>
+<pre><code class="language-javascript" id="code347">&lt;script&gt;
+  AConfig.addSourceMaps = true;
+  AConfig.keepCustomTagsInitState = false;
+&lt;/script&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code347')">Copy</button>
+<hr>
+<h2 id="best-practices-for-extensions"><strong>Best Practices for Extensions</strong></h2>
+<ol>
+<li><strong>Avoid Collisions</strong>: Use unique names for new functions to prevent overwriting existing implementations unintentionally.</li>
+<li><strong>Test Extensions Thoroughly</strong>: Extensions can have far-reaching effects, especially when replacing internal functions.</li>
+<li><strong>Follow Dependency Order</strong>: Use <code id="code348">addInitWait</code> to ensure dependencies are resolved before your extension executes.</li>
+<li><strong>Use Namespaces</strong>: Scope variables and keys within namespaces to avoid conflicts in dynamic contexts.</li>
+</ol>
+<hr>
+<my-link><a href="examplesindex.html" class="pure-button pure-button-primary">> Examples</a></my-link>
+</my-page>
+<!--AUnwanted-->
+</body>
+</html>
+<!--/AUnwanted-->

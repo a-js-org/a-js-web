@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tag redefinition demo</title>
+<script src="../a.js">keepCustomTagsInitState:true</script>
+<script>
+	Lc = ["pretty", "large", "big", "small", "tall", "short", "long", "handsome", "plain", "quaint", "clean", "elegant", "easy", "angry", "crazy", "helpful", "mushy", "odd", "unsightly", "adorable", "important", "inexpensive", "cheap", "expensive", "fancy"]
+    Oc = ["red", "yellow", "blue", "green", "pink", "brown", "purple", "brown", "white", "black", "orange"]
+    Dc = ["table", "chair", "house", "bbq", "desk", "car", "pony", "cookie", "sandwich", "burger", "pizza", "mouse", "keyboard"]
+	function makeline() {
+		let i1 = Math.floor(Math.random()*Lc.length)
+		let i2 = Math.floor(Math.random()*Oc.length)
+		let i3 = Math.floor(Math.random()*Dc.length)
+		return Lc[i1] + "," + Oc[i2] + "," + Dc[i3] + "\n"
+	}
+	function makecontent() {
+		let nb = 5 + Math.floor(Math.random()*5);
+		let text = "";
+		for (let i=0;i<nb;i++) {
+			text += makeline();
+		}
+		return text;
+	}
+	function appendCustomTag() {
+		let tag = document.createElement("my-csv-display")
+		tag.innerHTML = makecontent();
+		document.body.appendChild(tag)
+		document.body.appendChild(document.createElement("br"))
+	}
+	
+	function setTagDefinitionTable() {
+		let tagDef = document.createElement("a-tagdef")
+		tagDef.setAttribute("forTag","my-csv-display")
+		tagDef.setAttribute("redefine","")
+		tagDef.innerHTML = `
+				let content = A.getNonATextContent(currentElement).txt.trim();
+				A.removeNonATextContent(currentElement);
+				let contentRows = content.split(/\\n/g)
+				let wrapper = document.createElement("table")
+				currentElement.appendChild(wrapper);
+				for (let i=0;i < contentRows.length;i++) {
+					let row = contentRows[i];
+					let elemrow = document.createElement("tr")
+					wrapper.appendChild(elemrow);
+					let cells = row.split(/,/g);
+					for (let j=0; j < cells.length; j++) {
+						let elemcell = document.createElement("td")
+						elemcell.innerHTML = cells[j];
+						elemrow.appendChild(elemcell)
+					}
+				}
+		`
+		document.body.appendChild(tagDef)
+	}
+	function setTagDefinitionDivSpan() {
+		let tagDef = document.createElement("a-tagdef")
+		tagDef.setAttribute("forTag","my-csv-display")
+		tagDef.setAttribute("redefine","")
+		tagDef.innerHTML = `
+				let content = A.getNonATextContent(currentElement).txt.trim();
+				A.removeContent(currentElement);
+				let contentRows = content.split(/\\n/g)
+				let wrapper = document.createElement("div")
+				currentElement.appendChild(wrapper);
+				for (let i=0;i < contentRows.length;i++) {
+					let row = contentRows[i];
+					let elemrow = document.createElement("div")
+					wrapper.appendChild(elemrow);
+					let cells = row.split(/,/g);
+					for (let j=0; j < cells.length; j++) {
+						let elemcell = document.createElement("span")
+						elemcell.innerHTML = cells[j];
+						elemrow.appendChild(elemcell)
+					}
+				}
+		`
+		document.body.appendChild(tagDef)
+	}
+</script>
+<style>
+	table,tr,td {
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+	div, span {
+		border: 1px solid black;
+	}
+	span {
+		display: inline-block;
+	}
+</style>
+</head>
+<body>
+	<button onclick="setTagDefinitionTable()">Set my-csv-display definition as table</button>
+	<button onclick="setTagDefinitionDivSpan()">Set my-csv-display definition as divs and spans</button>
+	<button onclick="A.replayCustomTagsByName('my-csv-display')">Update existing my-csv-display with current definition</button>
+	<button onclick="appendCustomTag()">Append new &lt;my-csv-display&gt;</button>
+<script>
+	setTagDefinitionTable()
+</script>
+</body>
+</html>

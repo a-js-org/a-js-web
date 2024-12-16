@@ -1,0 +1,263 @@
+/* styles.css */
+
+a:importtarget {
+	display: none;
+}
+body > my-page {
+  opacity: 1;
+  animation: fadeIn 0.2s 1s;
+}
+@starting-style {
+	body > my-page {
+	  opacity: 0;
+	}
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/*menu styles */
+.custom-restricted {
+	background-color: #333;
+	max-height: calc(100vh-96px);
+	position: fixed;
+	top: 96px;
+	left: 0px;
+	max-width: 150px;
+}
+
+.custom-restricted .pure-menu-heading,.custom-restricted .pure-menu-link {
+	white-space: normal;
+}
+
+.custom-restricted .menu-item-title .pure-menu-heading,.custom-restricted .menu-item-title  .pure-menu-link {
+	padding-left: 0.5em;
+	display: list-item;
+}
+
+.custom-restricted li {
+	display: none;
+}
+
+.custom-restricted li.pure-menu-selected {
+	display: list-item;
+}
+
+.custom-restricted ul.pure-menu-selected li {
+	display: list-item;
+}
+
+.custom-restricted li.menu-item-title {
+	display: list-item
+}
+
+/* Header Styles */
+.header {
+	position: fixed;
+    background-color: #333; /* Neutral black */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    color: white;
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 40px;
+    margin-right: 10px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.logo-text {
+    display: inline-block;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+/* Menu Container */
+.menu-container {
+    position: relative;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: white;
+    cursor: pointer;
+}
+
+/* Navigation Menu */
+.pure-menu-list {
+    list-style: none;
+    gap: 15px;
+    margin: 0;
+}
+
+.pure-menu-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.pure-menu-link:hover {
+    color: #FFD700; /* Gold for hover state */
+}
+
+.pure-menu-active>.pure-menu-link,.pure-menu-link:focus,.pure-menu-link:hover {
+    background-color: #aaa
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 680px) {
+    .pure-menu-horizontal .pure-menu-list {
+        display: none; /* Start hidden */
+        flex-direction: column;
+        position: absolute;
+        top: 55px;
+        right: 10px;
+        background-color: #333;
+        border: 1px solid #444;
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 1000;
+    }
+
+    .pure-menu-horizontal .menu-container:hover .pure-menu-list {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(to bottom right, #fff, #f0f0f0); /* Neutral gradient */
+    color: #333;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.hero-content span {
+    color: #FFD700; /* Gold accent */
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.pure-button-primary {
+    background: #FFD700;
+    color: #333;
+    border: none;
+    font-weight: bold;
+}
+
+.pure-button-primary:hover {
+    background: #FFC107;
+    color: black;
+}
+
+.pure-button {
+    margin: 0 10px;
+    border: 1px solid #333;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+h1, h2, h3 {
+    color: #0078e7;
+}
+code {
+    background: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+pre {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+.note {
+    background: #e7f3ff;
+    border-left: 5px solid #0078e7;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+a {
+    text-decoration: none;
+}
+table {
+	border-spacing: 0;
+    border-collapse: collapse
+}
+table tr {
+	border-top: 1px solid lightgray
+}
+table tr:nth-child(2n) {
+	background-color: #f6f8fa;
+}
+
+table.padded-cells th, table.padded-cells td {
+	padding: 6px 13px;
+}
+
+table th {
+	border: 1px solid lightgray
+}
+
+table td {
+	border: 1px solid lightgray
+}
+
+menuandpage {
+	display: flex;
+	padding-top: 96px;
+	padding-left: 150px;
+}
+body > my-page {
+	margin-top: 96px;
+	margin-left: 150px;	
+}

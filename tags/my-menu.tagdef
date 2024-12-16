@@ -1,0 +1,50 @@
+{(<div class="pure-menu scrollable custom-restricted">
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item menu-item-title">
+            <my-link><a href="featuresindex.html" class="pure-menu-link">Features</a></mylink>
+        </li>
+        <li class="pure-menu-item">
+        	<my-link><a href="featuresflexworkmanifesto.html" class="pure-menu-link">a flexwork?</a></my-link>
+        </li>
+        <li class="pure-menu-item">
+        	<my-link><a href="ajsasaflexwork.html" class="pure-menu-link">a.js is one</a></my-link>
+        </li>
+    </ul>
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item menu-item-title">
+            <my-link><a href="docoverview.html" class="pure-menu-link">Documentation</a></mylink>
+        </li>
+        <li class="pure-menu-item">
+            <my-link><a href="docintro.html" class="pure-menu-link">Introduction</a></mylink>
+        </li>
+        <li class="pure-menu-item">
+            <my-link><a href="docgettingstarted.html" class="pure-menu-link">Getting started</a></mylink>
+        </li>
+        <li class="pure-menu-item">
+            <my-link><a href="doca-elements.html" class="pure-menu-link">Custom tags</a></mylink>
+        </li>
+        <li class="pure-menu-item">
+            <my-link><a href="docglobalmethods.html" class="pure-menu-link">Global methods</a></mylink>
+        </li>
+        <li class="pure-menu-item">
+            <my-link><a href="docscopedvars.html" class="pure-menu-link">Scoped variables</a></mylink>
+        </li>
+        <li class="pure-menu-item">
+            <my-link><a href="docadvancedfuncs.html" class="pure-menu-link">Advanced functionalities</a></mylink>
+        </li>
+        <li class="pure-menu-item">
+            <my-link><a href="docreactivestate.html" class="pure-menu-link">Reactive state</a></mylink>
+        </li>
+        <li class="pure-menu-item">
+            <my-link><a href="docdebugging.html" class="pure-menu-link">Debuging</a></mylink>
+        </li>
+        <li class="pure-menu-item">
+            <my-link><a href="docextending.html" class="pure-menu-link">Extending a.js</a></mylink>
+        </li>
+    </ul>
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item menu-item-title">
+            <my-link><a href="examplesindex.html" class="pure-menu-link">Examples</a></mylink>
+        </li>
+    </ul>
+</div>)}

@@ -1,0 +1,76 @@
+<a-tagdef fortag="my-layout">
+{(<span><div id="header"><my-header singleton="header">
+	<script>
+	window.addEventListener("popstate", (event) => {
+	  if (event.state) {
+	    A.importIn(null,event.state.route)
+	  }
+	});
+</script>
+	    <header class="pure-menu pure-menu-horizontal header">
+        <my-link><a href="index.html" class="pure-menu-heading logo">
+            <img src="images/logo/a-js-logo.png" alt="a.js Logo" class="logo-img"> <span class="logo-text">A.JS</span>
+        </a></my-link>
+        <div class="menu-container">
+            <button class="pure-button menu-toggle">☰</button>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><my-link><a href="featuresindex.html" class="pure-menu-link">Features</a></my-link></li>
+                <li class="pure-menu-item"><my-link><a href="docoverview.html" class="pure-menu-link">Documentation</a></my-link></li>
+                <li class="pure-menu-item"><my-link><a href="examplesindex.html" class="pure-menu-link">Examples</a></my-link></li>
+                <li class="pure-menu-item"><a href="https://github.com/a-js-org" class="pure-menu-link" target="_blank">Github</a></li>
+            </ul>
+        </div>
+    </header>
+</my-header></div><menuandpage><div id="menu"><my-menu singleton="menu"></my-menu></div>
+<div id="main"><my-page singleton="page">Default page</my-page></div></menuandpage></span>)}
+</a-tagdef>
+<a-tagdef fortag="my-header">
+	<import src="../tags/my-header.html" type="text/html"></import>
+</a-tagdef>
+<a-tagdef fortag="my-menu">
+	<import src="../tags/my-menu.tagdef"></import>
+	<let>
+		global watched menu
+	</let>
+	watch(function() {
+		if (menu.curRoute) {
+			let selected = currentElement.querySelectorAll(".pure-menu-selected")
+			for (el of selected) {
+				el.classList.remove("pure-menu-selected")
+			}
+			let curRouteElem = currentElement.querySelector('[route="'+menu.curRoute+'"],[href="'+menu.curRoute+'"]')
+			if (curRouteElem) {
+				do {
+					curRouteElem.classList.add("pure-menu-selected")
+					curRouteElem = curRouteElem.parentElement;
+				} while (curRouteElem.tagName!="MY-MENU")
+			}
+		}
+	})
+</a-tagdef>
+<a-tagdef fortag="my-page">
+	<import src="../tags/my-page.tagdef"></import>
+</a-tagdef>
+<a-tagdef fortag="my-link">
+	<let>
+		global watched menu
+	</let>
+	let route = currentElement.getAttribute("route")
+	if (!route) {
+		let el = currentElement.querySelector("[href]")
+		if (el) {
+			route = el.getAttribute("href")
+		}
+	}
+	if (route) {
+		currentElement.addEventListener("click",(evt) => {
+			evt.preventDefault();
+			evt.stopPropagation();
+			evt.stopImmediatePropagation();
+			A.importIn(null,route)
+			history.pushState({route},"",route)
+			menu.curRoute = route;	
+		},true)
+	}
+</a-tagdef>
+<my-layout singleton="layout"></my-layout>

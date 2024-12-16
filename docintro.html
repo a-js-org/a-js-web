@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--AUnwanted-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a.js - Modular, Reactive, Empowering</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css">
+<link rel="stylesheet" href="css/styles.css">
+<script a-extension src="a-spaext.js"></script>
+<script src="importa.js"></script>
+</head>
+<body>
+	<layout>
+<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+	</layout>
+<!--/AUnwanted-->
+<my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
+<h2>Introduction</h2>
+<p><strong>a.js</strong> is a lightweight and versatile JavaScript Flexwork/library designed for building reactive and dynamic web components. It extends the power of native web components by introducing custom tags (<code>&lt;a-script&gt;</code>, <code>&lt;a-closure&gt;</code>, and <code>&lt;a-tagDef&gt;</code>) that simplify complex operations such as state management, reactivity, and scoped behavior. These custom tags integrate seamlessly with modern JavaScript, allowing developers to create dynamic user interfaces with ease.</p>
+
+<p>This documentation is targeted at developers familiar with JavaScript. Knowledge about web components and proxies is useful to understand what's going one behind the scene. If you are unfamiliar with these concepts, refer to the following resources for a brief primer:</p>
+<ul>
+    <li><strong>Web Components</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" target="_blank">MDN Web Components Guide</a></li>
+    <li><strong>JavaScript Proxies</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank">MDN Proxy Documentation</a></li>
+</ul>
+
+<h3>Key Highlights</h3>
+<ul>
+    <li>Enhanced web components for rapid UI development.</li>
+    <li>Reactive variables managed through JavaScript proxies.</li>
+    <li>Modular and reusable code through <code>&lt;a-tagDef&gt;</code>.</li>
+    <li>Allows redefining web components already declared with <strong>a.js</strong>.</li>
+    <li>Seamless integration with HTML and JavaScript ecosystems.</li>
+</ul>
+
+<hr>
+
+<h2>Overview of Features</h2>
+<h3>Custom HTML Tags</h3>
+<p>a.js introduces three primary custom tags to enhance web development:</p>
+<ol>
+    <li><strong><code>&lt;a-script&gt;</code></strong>
+        <ul>
+            <li>A custom replacement for the <code>&lt;script&gt;</code> tag with additional functionality, including scoped execution and integration with a.js features.</li>
+        </ul>
+    </li>
+    <li><strong><code>&lt;a-closure&gt;</code></strong>
+        <ul>
+            <li>Encapsulates JavaScript code in a closure for isolated execution, preventing global namespace pollution.</li>
+        </ul>
+    </li>
+    <li><strong><code>&lt;a-tagDef&gt;</code></strong>
+        <ul>
+            <li>Defines reusable custom components that can be dynamically instantiated in the DOM and re-defined when necessary.</li>
+        </ul>
+    </li>
+</ol>
+
+<h3>Special Variables and Behaviors</h3>
+<ul>
+    <li><strong><code>currentScript</code></strong> and <strong><code>currentElement</code></strong>:
+        <ul>
+            <li>Provide references to the active <code>&lt;script&gt;</code> or target element within a.js tags, streamlining access to DOM elements.</li>
+        </ul>
+    </li>
+    <li><strong>Enhanced Reactivity</strong>:
+        <ul>
+            <li>Watched variables defined within <code>&lt;let&gt;</code> blocks use JavaScript proxies for fine-grained reactivity, enabling automatic updates to UI elements.</li>
+            <li>Non-watched variables defined within <code>&lt;let&gt;</code> blocks allow you to maintain state inside a component or between several of them without triggering reactivity.</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>Modular Imports</h3>
+<ul>
+    <li><strong><code>&lt;import&gt;</code> tag:</strong>
+        <ul>
+            <li>Dynamically import JavaScript, CSS, or HTML fragments.</li>
+            <li>Includes recursive resolution of imports within <code>&lt;a-xxx&gt;</code> tags.</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>Advanced Features</h3>
+<ul>
+    <li><strong>Scoped Variables:</strong> Manage variables at global, namespace, or local levels with fine control over their visibility and lifecycle.</li>
+    <li><strong>Reactive Loops:</strong> Use <code>&lt;forEachOf&gt;</code> tags to create dynamically reactive lists.</li>
+    <li><strong>Dynamic Keyed Elements:</strong> Optimize updates for elements inside reactive loops by using unique keys.</li>
+    <li><strong>Custom Event Handling:</strong> Automatically attach reactive event listeners to DOM elements created with a.js.</li>
+</ul>
+<my-link><a href="docgettingstarted.html" class="pure-button pure-button-primary">> Getting started </a></my-link> 
+</my-page>
+<!--AUnwanted-->
+</body>
+</html>
+<!--/AUnwanted-->

@@ -1,0 +1,55 @@
+<a-tagDef fortag="my-playground">
+	<import type="css">
+	textarea {
+		width : 45%
+	}
+	iframe {
+		width: 45%;
+	}
+	</import>
+	let text = A.getNonATextContent(currentElement).txt
+	currentElement.innerHTML = "";
+	let trybtn = currentElement.getAttribute("trybtn")
+	let btn = null;
+	if (trybtn) {
+		btn = {(=<button onclick="executeACode()">${trybtn}</button>)}
+	}
+	let textarea = {(=<textarea></textarea>)}
+	textarea.value = text
+	let playground = null;
+	function buildplaygroundiframedocument() {
+		if (playground) {
+			playground.remove();
+		}
+		playground = {(=<iframe src="about:blank"></iframe>)}
+		<script type="a/unparsed">
+		playground.srcdoc = "<html><head></head><body><script>(()=>{})()</script></body></html>"
+		</script>
+		return new Promise(((resolve, reject) => {
+		  function checkscript() {
+			  let pd = playground.contentDocument
+			  if (pd.scripts.length>0) {
+				  resolve(pd)
+			  } else {
+				setTimeout(checkscript,0)  
+			  }
+		  }
+		  checkscript()
+		}))
+	}
+	buildplaygroundiframedocument()
+	function executeACode(text) {
+		buildplaygroundiframedocument().then((pd) => {
+			if (text==undefined) {
+				text = textarea.value
+			} else {
+				textarea.value = text;
+			}
+			let script = pd.createElement("script")
+			script.src = A.script.src
+			pd.head.appendChild(script)	
+			pd.body.innerHTML = text
+		})
+	}
+	expose(executeACode)
+</a-tagDef>

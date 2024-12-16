@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--AUnwanted-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a.js - Modular, Reactive, Empowering</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css">
+<link rel="stylesheet" href="css/styles.css">
+<script a-extension src="a-spaext.js"></script>
+<script src="importa.js"></script>
+</head>
+<body>
+	<layout>
+<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+	</layout>
+<!--/AUnwanted-->
+<my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
+<h2>Getting Started</h2>
+<p>To start using <strong>a.js</strong>, include the library in your project by adding the following script tag to your HTML file:</p>
+<pre id="code1"><code>&lt;script src="path/to/a.js"&gt;&lt;/script&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code1')">Copy</button>
+<p>Replace <code>path/to/a.js</code> with the actual path to the a.js file in your project.</p>
+
+<h3>Minimal Setup</h3>
+<p>Here is a minimal example of using <strong>a.js</strong> to create a reactive component:</p>
+<pre id="code2"><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;script src="a.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a-closure&gt;
+        &lt;let&gt;
+            global watched g.message
+        &lt;/let&gt;
+        g.message = "Hello, a.js!"
+        {(&lt;p&gt;${g.message}&lt;/p&gt;)}
+        {(&lt;button onclick="g.message = 'Message Updated!'"&gt;Update Message&lt;/button&gt;)}
+    &lt;/a-closure&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code2')">Copy</button>
+<p>This example demonstrates how to:</p>
+<ul>
+    <li>Declare a reactive variable <code>g.message</code>.</li>
+    <li>Bind the variable to a DOM element for dynamic updates.</li>
+    <li>Update the variable interactively using a button click.</li>
+</ul>
+
+<hr>
+
+<h2>Core Concepts</h2>
+<p>The core concepts of <strong>a.js</strong> revolve around enhancing native web development with custom elements and reactivity. Below are the foundational ideas:</p>
+
+<h3>Custom Elements with <code>&lt;a-tagDef&gt;</code></h3>
+<p><code>&lt;a-tagDef&gt;</code> is a key feature that allows you to define reusable custom components. Here’s an example:</p>
+<pre id="code3"><code>&lt;a-tagDef fortag="custom-element"&gt;
+    {(&lt;div&gt;This is a custom element&lt;/div&gt;)}
+&lt;/a-tagDef&gt;
+&lt;custom-element&gt;&lt;/custom-element&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code3')">Copy</button>
+<p>In this example, <code>&lt;custom-element&gt;</code> renders the content defined in <code>&lt;a-tagDef&gt;</code>.</p>
+
+<h3>Scoped Execution with <code>&lt;a-closure&gt;</code></h3>
+<p>The <code>&lt;a-closure&gt;</code> tag creates a self-contained scope for variables and DOM manipulation:</p>
+<pre id="code4"><code>&lt;a-closure&gt;
+    &lt;let&gt;
+        global watched g.counter = 0;
+    &lt;/let&gt;
+    {(&lt;p&gt;Counter: ${g.counter}&lt;/p&gt;)}
+    &lt;button onclick="g.counter++"&gt;Increment&lt;/button&gt;
+&lt;/a-closure&gt;</code></pre>
+<button class="pure-button" onclick="copyCode(this, 'code4')">Copy</button>
+<p>In this example:</p>
+<ul>
+    <li><code>g.counter</code> is initialized to <code>0</code>.</li>
+    <li>Clicking the button increments <code>g.counter</code> and updates the paragraph.</li>
+</ul>
+
+<h3>Reactivity with <code>watched</code> Variables</h3>
+<p>Reactive variables defined with <code>watched</code> automatically update the DOM when their values change. This is a core feature of <strong>a.js</strong> and is illustrated in the examples above.</p>
+
+<div class="note">
+    <strong>Tip:</strong> Combine <code>&lt;a-closure&gt;</code> and <code>watched</code> variables for highly interactive and modular web components.
+</div>
+
+<my-link><a href="doca-elements.html" class="pure-button pure-button-primary">> Custom tags </a></my-link> 
+
+</my-page>
+<!--AUnwanted-->
+</body>
+</html>
+<!--/AUnwanted-->

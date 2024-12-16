@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!--AUnwanted-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a.js - Modular, Reactive, Empowering</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css">
+<link rel="stylesheet" href="css/styles.css">
+<script a-extension src="a-spaext.js"></script>
+<script src="importa.js"></script>
+</head>
+<body>
+	<layout>
+<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+	</layout>
+<!--/AUnwanted-->
+<my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
+<h2 id="advanced-functionalities">Advanced Functionalities</h2>
+
+<h3 id="reactive-loops-with-foreachof">Reactive Loops with <code id="code197">&lt;foreachof&gt;</code></h3>
+<p>The <code id="code198">&lt;foreachof&gt;</code> tag creates reactive loops that dynamically update the DOM when the underlying data changes.</p>
+<h4 id="syntax-21">Syntax:</h4>
+<pre><code class="language-html" id="code199">&lt;foreachof a.jsvariable="value, index"&gt;
+  {(&lt;div&gt;${...}&lt;/div&gt;)}
+&lt;/foreachof&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code199')">Copy</button>
+<h4 id="example-12">Example:</h4>
+<pre><code class="language-html" id="code200">&lt;a-closure&gt;
+  &lt;let&gt;
+    global watched g.items = ["Item 1", "Item 2", "Item 3"];
+  &lt;/let&gt;
+  &lt;foreachof a.jsvariable="g.items, idx"&gt;
+    {(&lt;div key="${idx}"&gt;${g.items[idx]}&lt;/div&gt;)}
+  &lt;/foreachof&gt;
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code200')">Copy</button>
+<h3 id="custom-tags-and--elements-attributes">Custom Tags and <a-xxxx> Elements attributes</a-xxxx></h3>
+<h4 id="singleton"><code id="code201">singleton</code></h4>
+<h5 id="description-2">Description:</h5>
+<p>The <code id="code202">singleton</code> attribute ensures only one instance of an element with the same singleton name exists. Any new element with the same name will be automatically removed from the DOM before a.js does any parsing/execution.</p>
+<h5 id="behavior-3">Behavior:</h5>
+<ul>
+<li>Guarantees a single instance per name.</li>
+<li>Useful for ensuring unique global components.</li>
+</ul>
+<h5 id="syntax-22">Syntax:</h5>
+<pre><code class="language-html" id="code203">&lt;a-closure singleton="unique-component"&gt;
+  &lt;div&gt;Unique Content&lt;/div&gt;
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code203')">Copy</button>
+<hr>
+<h4 id="singletonreplace"><code id="code204">singletonreplace</code></h4>
+<h5 id="description-3">Description:</h5>
+<p>The <code id="code205">singletonreplace</code> attribute allows replacing existing singletons.</p>
+<ul>
+<li>if the attribute value is "existing", then the new singleton will replace the previous one <strong>and be moved at the same spot in the DOM than the previous singleton</strong> no matter where it appeared in the DOM.</li>
+<li>if the attribute value is "false", the element is automtically removed</li>
+<li>if the attribute value is anything else, the existing singleton is removed, and the new one is the new singleton. The new singleton isn't moved, and stays where it is in the DOM.</li>
+</ul>
+<h5 id="behavior-4">Behavior:</h5>
+<ul>
+<li>Forces the replacement of an existing singleton.</li>
+</ul>
+<h5 id="syntax-23">Syntax:</h5>
+<pre><code class="language-html" id="code206">&lt;a-closure singleton="unique-component" singletonreplace&gt;
+  &lt;div&gt;Replaced Content&lt;/div&gt;
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code206')">Copy</button>
+<hr>
+<h4 id="waitfor"><code id="code207">waitFor</code></h4>
+<h5 id="description-4">Description:</h5>
+<p>The <code id="code208">waitFor</code> attribute delays the parsing and execution of an element until specified conditions are met. It uses a chain of selectors to resolve dependencies.</p>
+<h5 id="behavior-5">Behavior:</h5>
+<ul>
+<li>The array of selectors is resolved sequentially, with each dependent on the previous.</li>
+<li>Ensures the required elements are parsed before proceeding.</li>
+</ul>
+<h5 id="syntax-24">Syntax:</h5>
+<pre><code class="language-html" id="code209">&lt;a-closure waitFor='["my-layout", "#main", "my-page"]'&gt;
+  &lt;div&gt;Dependent Content&lt;/div&gt;
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code209')">Copy</button>
+<h5 id="example-13">Example:</h5>
+<ul>
+<li>Resolves <code id="code210">my-layout</code> in the document.</li>
+<li>Waits for <code id="code211">#main</code> within <code id="code212">my-layout</code>.</li>
+<li>Finally, waits for <code id="code213">my-page</code> within <code id="code214">#main</code>.</li>
+</ul>
+<h1 id="modular-imports-in-ajs">Modular Imports in a.js</h1>
+<h2 id="overview">Overview</h2>
+<p>The <code id="code215">&lt;import&gt;</code> tag in a.js allows developers to dynamically include external JavaScript, CSS, or HTML resources into their projects, but it must be used within <code id="code216">&lt;a-xxxxx&gt;</code> elements. This ensures that imports are scoped to the containing custom element, preventing unintended side effects on unrelated parts of the application.</p>
+<h3 id="key-features">Key Features</h3>
+<ol>
+<li><strong>Recursive Import Resolution</strong>: Handles dependencies between imported modules.</li>
+<li><strong>Scoped Resource Application</strong>: Automatically scoped by the enclosing <code id="code217">&lt;a-xxxxx&gt;</code> element.</li>
+<li><strong>Dynamic Resource Loading</strong>: Allows runtime inclusion of resources using the <code id="code218">A.importIn</code> function.</li>
+<li><strong>Pre-parsing Behavior</strong>: Imports are processed before any other content in the enclosing <code id="code219">&lt;a-xxxxx&gt;</code> element, influencing the final structure and behavior of the element.</li>
+</ol>
+<hr>
+<h2 id="syntax-25">Syntax</h2>
+<p>The <code id="code220">&lt;import&gt;</code> tag uses the following attributes:</p>
+<ul>
+<li><strong><code id="code221">src</code></strong>: Specifies the URL or path of the resource to import. Supports JavaScript (within <code id="code222">&lt;a-xxxxx&gt;</code> elements), CSS, and HTML files.</li>
+<li><strong><code id="code223">type</code></strong>: Defines the type of the resource (e.g., <code id="code224">"javascript"</code>, <code id="code225">"css"</code>, or <code id="code226">"html"</code>). Defaults to a script/text import (inside an <code id="code227">&lt;a-xxxxx&gt;</code> element) if omitted.</li>
+</ul>
+<h3 id="example-14">Example</h3>
+<pre><code class="language-html" id="code228">&lt;a-closure&gt;
+  &lt;import src="./styles/main.css" type="css"&gt;&lt;/import&gt; //import the styles in main.css in a way that only applies them to the children of currentElement
+  &lt;import src="./scripts/utils.js" type="javascript"&gt;&lt;/import&gt; //replace this &lt;import&gt;&lt;/import&gt; tag by the text of the ./scripts/utils.js file. If this text contains an import tag, it will be resolved too.
+  &lt;import src="./components/header.html" type="html"&gt;&lt;/import&gt; //import the content of ./components/header.html as child nodes of currentElement.
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code228')">Copy</button>
+<hr>
+<h2 id="detailed-behavior">Detailed Behavior</h2>
+<h3 id="pre-parsing-behavior">Pre-parsing Behavior</h3>
+<p>Imports are the first elements to be processed inside an <code id="code229">&lt;a-xxxxx&gt;</code> element. This means that they are parsed and executed before any other content or logic within the element. 
+This means it (usually) makes no sense to write something like</p>
+<pre><code class="language-html" id="code230">&lt;a-closure&gt;
+  currentElement.innerHTML = '&lt;import src="./styles/dark-theme.css" type="css"&gt;&lt;/import&gt;';
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code230')">Copy</button>
+<p>Because at runtime, the <code id="code231">&lt;import&gt;</code> will have been processed, and the script inside <code id="code232">&lt;a-closure&gt;</code> will see the following:</p>
+<pre><code class="language-html" id="code233">&lt;a-closure&gt;
+  currentElement.innerHTML = '';
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code233')">Copy</button>
+<h3 id="recursive-import-resolution">Recursive Import Resolution</h3>
+<p>When an imported resource references additional dependencies, a.js resolves these recursively. This ensures that all necessary resources are loaded before the application interacts with them.</p>
+<h4 id="example-15">Example</h4>
+<p>If <code id="code234">utils.js</code> contains <code id="code235">&lt;import src="./scripts/helpers.js"&gt;&lt;/import&gt;</code>, the following code ensures both are loaded:</p>
+<pre><code class="language-html" id="code236">&lt;a-closure&gt;
+  &lt;import src="./scripts/utils.js" type="javascript"&gt;&lt;/import&gt;
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code236')">Copy</button>
+<h3 id="dynamic-resource-loading">Dynamic Resource Loading</h3>
+<p>Dynamic resource loading can be accomplished using <code id="code237">A.importIn</code>, which programmatically loads resources into a specified element.</p>
+<h4 id="example-16">Example</h4>
+<pre><code class="language-javascript" id="code238">A.importIn(currentElement, './html/layout.html', "html");
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code238')">Copy</button>
+<hr>
+<h2 id="practical-use-cases">Practical Use Cases</h2>
+<h3 id="modular-component-development">Modular Component Development</h3>
+<p>By importing HTML fragments as custom components, developers can keep their code modular and reusable.</p>
+<h4 id="example-17">Example</h4>
+<pre><code class="language-html" id="code239">&lt;a-tagDef forTag="custom-card"&gt;
+  &lt;import src="./components/card.tagdef"&gt;&lt;/import&gt;
+&lt;/a-tagDef&gt;
+
+&lt;custom-card&gt;&lt;/custom-card&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code239')">Copy</button>
+<h3 id="dynamic-style-application">Dynamic Style Application</h3>
+<p>Switching themes or applying styles dynamically based on user actions is simplified with <code id="code240">A.importIn</code>.</p>
+<h4 id="example-18">Example</h4>
+<pre><code class="language-html" id="code241">
+&lt;a-closure&gt;
+  {(&lt;button onclick="loadTheme('dark')"&gt;Dark Theme&lt;/button&gt;)}
+  {(&lt;button onclick="loadTheme('light')"&gt;Light Theme&lt;/button&gt;)}
+  let loaded = null;
+  function loadTheme(theme) {
+      if (loaded) {
+        loaded.obj.remove();
+    }
+    A.importIn(currentElement, `./styles/${theme}-theme.css`, 'css',(elem,url,type,imports) =&gt; {
+        loaded = imports.css[0]
+    },true });
+  }
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code241')">Copy</button>
+<hr>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Minimize Overuse</strong>: Avoid overloading the application with too many <code id="code242">&lt;import&gt;</code> tags to maintain performance.</li>
+<li><strong>Understand Pre-parsing</strong>: Remember that imports are processed before any other logic in the enclosing <code id="code243">&lt;a-xxxxx&gt;</code> element.</li>
+<li><strong>Lazy Loading</strong>: Utilize <code id="code244">A.importIn</code> to load resources dynamically and optimize page load times.</li>
+</ol>
+<hr>
+<p>By using the <code id="code245">&lt;import&gt;</code> tag effectively, developers can create highly modular, dynamic, and maintainable web applications with a.js.</p>
+<hr>
+<my-link><a href="docreactivestate.html" class="pure-button pure-button-primary">> Reactive state management</a></my-link>
+</my-page>
+<!--AUnwanted-->
+</body>
+</html>
+<!--/AUnwanted-->

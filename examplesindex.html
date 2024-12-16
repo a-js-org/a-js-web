@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--AUnwanted-->
+<html>
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a.js - Modular, Reactive, Empowering</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css">
+<link rel="stylesheet" href="css/styles.css">
+<script a-extension src="a-spaext.js"></script>
+<script src="importa.js"></script>
+</head>
+<body>
+<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<!--/AUnwanted-->
+<my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
+	<section id="features" class="features-section">
+    <div class="container">
+        <h2 class="features-title">Tic Tac Toe</h2>
+        <p>
+			The <a href="examples/aTicTacToe.html" target="_blank">a Tic Tac Toe demo</a> illustrate the creation of a reactive Tic Tac Toe using the &lt;a-tagDef&gt; tag to define a board (&lt;my-board&gt;) and a square (&lt;my-square&gt;) web component.<br>
+        	You can test it <a href="examples/aTicTacToe.html" target="_blank">here</a> and download the <a href="examples/aTicTacToe.html" download target="_blank">source code here</a>. The example can run in a local file on the file system. Just set the correct path to a.js in the head script tag.</p>
+        	The demo uses watched variable shared between ancestors and children to manage the state of the game and the user interface. After each move, the state of the game is saved in the browser history, allowing you to navigate steps back and forth.<br>
+        	To illustrate that the components are correctly isolated, two boards are added to the page.
+        </p>
+        <h2 class="features-title">a.js Playground</h2>
+        <p>
+			The <a href="examples/playground/aPlayground.html" target="_blank">a Playground demo</a> illustrate the creation of a very basic a.js playground using the &lt;a-tagDef&gt; tag to define a playground (&lt;my-playground&gt;) and uses several &lt;import&gt; tags in the a-tagDef to retrieve code or style.<br>
+        	You can test it <a href="examples/playground/aPlayground.html" target="_blank">here</a>, download the <a href="examples/playground/aPlayground.html" download target="_blank">base source code here</a> and the <a href="examples/playground/playground.tagdef" download target="_blank">playground tag definition there</a>. The example can run in a local file on the file system. Just set the correct path to a.js in the head script tag.</p>
+        	The demo uses an iframe to run the a.js code you write/paste in the textarea. You can use it to try and run most of the code shown in the documentation on this site. 
+        </p>
+        <h2 class="features-title">Simple reactive table</h2>
+        <p>
+			The <a href="examples/aSimpleTable.html" target="_blank">Simple reactive table demo</a> illustrate the creation of a reactive table inside a &lt;a-closure&gt; tag.<br>
+        	You can test it <a href="examples/aSimpleTable.html" target="_blank">here</a> and download the <a href="examples/aSimpleTable.html" download target="_blank">source code here</a>. The example can run in a local file on the file system. Just set the correct path to a.js in the head script tag.</p>
+        	The demo uses a local watched variable for the table content which is reactively bound to the user interface by the element generating notation (...). Using the buttons you can create random lines in the tables, or remove them at the start or the end, or change the text, which is all done simply by manipulating the underlying array, using standard javascript array functions.
+        	The buttons are added to the &lt;a-closure&gt; currentElement using the element appending notation {(...)}.  			
+		</p>
+        <h2 class="features-title">Tag redefinition</h2>
+        <p>
+			The <a href="examples/aTagRedefinition.html" target="_blank">Tag redefinition demo</a> illustrate how you can override an existing &lt;a-tagDef&gt; defining a specific custom tag &lt;my-csv-display&gt;.<br>
+        	You can test it <a href="examples/aTagRedefinition.html" target="_blank">here</a> and download the <a href="examples/aTagRedefinition.html" download target="_blank">source code here</a>. The example can run in a local file on the file system. Just set the correct path to a.js in the head script tag.</p>
+        	The demo display random CSV like content as a table with the first definition, and as an ensemble of divs and spans with the second definition. Using the buttons, you can change the definition currently used, and experiment usage of the custom tags replay function.<br> 			
+        	We suggest you first "Append a new &lt;my-csv-display&gt;", to see how it display with a table based definition, then "Set my-csv-display definition as divs and spans" and "Append a new &lt;my-csv-display&gt;". See how it displays differently, but the first instance hasn't changed. If you then "Update existing my-csv-display with current definition", you'll see both instances now have the same appearance.
+		</p>
+        <h2 class="features-title">Watched (animation) demo</h2>
+        <p>
+			The <a href="examples/watchedvaranimation.html" target="_blank">Watched animation demo</a> illustrate a simple case of a watched function changing one of it's watched variables by itself, thus causing to call itself again. Coupled with reactive UI, it creates a simple filling bar.<br>
+        	You can test it <a href="examples/watchedvaranimation.html" target="_blank">here</a> and download the <a href="examples/watchedvaranimation.html" download target="_blank">source code here</a>. The example can run in a local file on the file system. Just set the correct path to a.js in the head script tag.</p>
+			Note that you absolutely should not do this if you want to animate such a bar. CSS animations do the job very well, and are far more appropriate. But it's a nice visual illustration of what's going on.<br>        	
+			The example does expose the returned value of the call to watch() in the console of the browser developper tools as watchResult. You can experiment with it, to see how the return value of the function is live updated in the object, or how setting suspend to false stop the reactions from triggering. 
+		</p>
+        <h2 class="features-title">This site</h2>
+        <a>
+			This site is powered as a SPA on a static pages webserver by a.js, extended with a simple a.js fetch extension to help manage the part of the static pages that are useless in the Single Page Application context before any parsing by the browser. 
+			It leverages the singleton and waitfor functionalities of a.js to ensure the content is always loaded at the right spot in the layout. 
+			It uses a-tagdef to define the menu &lt;my-menu&gt; and some routing functionalities in cooperation with the a-tagdef define &lt;my-link&gt;.
+			You can download and check the a.js <a href="a-spaext.js" download target="_blank">extension script here</a> the <a href="layouts/layout.html" download target="_blank">layout source here</a>, <a href="tags/my-menu.tagdef" download target="_blank">the menu tag definition here</a> and <a href="pageexample.html" download target="_blank">a sample page there</a>
+			Note that the this is a quick and dirty example of what can be done with a.js while extending it. If you plan to use it to manage a production full SPA site, we don't recommand using the example here as a base. 
+		</p>
+    </div>
+</section>
+</my-page>
+<!--AUnwanted-->
+</body>
+</html>
+<!--/AUnwanted-->

@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<script src="../a.js"></script>
+		<title>Watched animation demo</title>
+	</head>
+	<body>
+	
+<script>
+	var watchResult = null;
+</script>	
+<div>
+	<a-closure>
+		<let>
+			global watched g.a
+			global watched g.increase
+		</let>
+		g.a = 0;
+		g.increase = true;
+		{(<div style="background-color:blue;height:20px;"><div style="background-color:red;height:20px;width:${g.a}%"></div></div>)}
+		watchResult = watch(() => { 
+			if (g.increase) { 
+				if (g.a<100) g.a++; 
+			} else {
+				if (g.a>0) g.a--; 
+			} 
+			return g.a;
+		})
+		console.log(watchResult)
+		{(<button onclick="g.increase=!g.increase">Switch direction</button>)}
+	</a-closure>
+</div>
+	</body>
+</html>

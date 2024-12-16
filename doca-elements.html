@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<!--AUnwanted-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a.js - Modular, Reactive, Empowering</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css">
+<link rel="stylesheet" href="css/styles.css">
+<script a-extension src="a-spaext.js"></script>
+<script src="importa.js"></script>
+</head>
+<body>
+	<layout>
+<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+	</layout>
+<!--/AUnwanted-->
+<my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
+<h2 id="custom-tags-and-components">Custom Tags and Components</h2>
+<h3 id="a-closure"><code id="code21">&lt;a-closure&gt;</code></h3>
+<p>The <code id="code22">&lt;a-closure&gt;</code> tag serves as the backbone of a.js functionality. It encapsulates JavaScript code inside a closure, preventing unintended interactions with the global scope.</p>
+<h4 id="features">Features:</h4>
+<ul>
+<li>Automatically wraps the script content in an IIFE (Immediately Invoked Function Expression).</li>
+<li>Ensures variable isolation and reduces the risk of conflicts.</li>
+<li>Offers seamless access to a.js reactive variables and utilities.</li>
+</ul>
+<h4 id="syntax">Syntax:</h4>
+<pre><code class="language-html" id="code23">&lt;a-closure&gt;
+  // JavaScript code here
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code23')">Copy</button>
+<h4 id="example">Example:</h4>
+<pre><code class="language-html" id="code24">&lt;a-closure&gt;
+  let localVar = 'Scoped Variable';
+  console.log(localVar);
+  currentElement.innerHTML = 'This is scoped.';
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code24')">Copy</button>
+<h3 id="a-tagdef"><code id="code25">&lt;a-tagDef&gt;</code></h3>
+<p>The <code id="code26">&lt;a-tagDef&gt;</code> tag enables developers to define custom, reusable components. These components are instantiated dynamically in the DOM, promoting modular and maintainable code.</p>
+<h4 id="features-1">Features:</h4>
+<ul>
+<li>Allows the creation of custom elements with specific behavior and styles.</li>
+<li>Simplifies code reuse and encapsulation.</li>
+<li>Supports redefinition for existing tags with the <code id="code27">redefine</code> attribute.</li>
+</ul>
+<h4 id="syntax-1">Syntax:</h4>
+<pre><code class="language-html" id="code28">&lt;a-tagDef forTag="custom-tag"&gt;
+  // Code defining behavior for &lt;custom-tag&gt;
+&lt;/a-tagDef&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code28')">Copy</button>
+<h4 id="example-1">Example:</h4>
+<pre><code class="language-html" id="code29">&lt;a-tagDef forTag="custom-button"&gt;
+  currentElement.innerHTML = '&lt;button&gt;Click Me&lt;/button&gt;';
+  currentElement.addEventListener('click', () =&gt; {
+    alert('Button clicked!');
+  });
+&lt;/a-tagDef&gt;
+
+&lt;custom-button&gt;&lt;/custom-button&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code29')">Copy</button>
+<h4 id="a-tagdefattributes"><code id="code30">&lt;a-tagdef&gt;</code>attributes</h4>
+<h5 id="fortag"><code id="code31">forTag</code></h5>
+<h6 id="description">Description:</h6>
+<p>The <code id="code32">forTag</code> attribute is used in <code id="code33">&lt;a-tagDef&gt;</code> elements to define a custom tag. This attribute specifies the name of the custom tag being defined.</p>
+<h6 id="behavior">Behavior:</h6>
+<ul>
+<li>If a custom tag with the specified name already exists, a.js will throw an error unless the <code id="code34">redefine</code> attribute is present.</li>
+<li>It associates the <code id="code35">&lt;a-tagDef&gt;</code> content with the defined custom tag name.</li>
+</ul>
+<h6 id="syntax-2">Syntax:</h6>
+<pre><code class="language-html" id="code36">&lt;a-tagDef forTag="custom-box"&gt;
+  currentElement.innerHTML = '&lt;div&gt;Custom Box&lt;/div&gt;';
+&lt;/a-tagDef&gt;
+
+&lt;custom-box&gt;&lt;/custom-box&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code36')">Copy</button>
+<hr>
+<h5 id="redefine"><code id="code37">redefine</code></h5>
+<h6 id="description-1">Description:</h6>
+<p>The <code id="code38">redefine</code> attribute allows redefining an existing custom tag. Without this attribute, a.js will ignore the redefinition attempt.</p>
+<h6 id="behavior-1">Behavior:</h6>
+<ul>
+<li>Mandatory for redefining a tag.</li>
+<li>Applies only to newly connected custom tags unless <code id="code39">A.replayCustomTag(element)</code> or <code id="code40">A.replayCustomTagsByName("tagname")</code> is called.</li>
+</ul>
+<h6 id="syntax-3">Syntax:</h6>
+<pre><code class="language-html" id="code41">&lt;a-tagDef forTag="custom-box" redefine&gt;
+  currentElement.innerHTML = '&lt;div&gt;Updated Custom Box&lt;/div&gt;';
+&lt;/a-tagDef&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code41')">Copy</button>
+<p>
+	when you add the above to the DOM, the <code>&lt;custom-box&gt;</code> tags that already are in the document will still display <code>Custom box</code>, but any new <code>&lt;custom-box&gt;</code> tag you append to the DOM will display <code>Updated Custom Box</code>.
+	If you want the existing <code>&lt;custom-box&gt;</code> tags to adopt the new definition, you have to call <code>A.replayCustomTag(element)</code> on each of them individually, or <code>A.replayCustomTagsByName("custom-box")</code> to update all of them at once.
+</p>
+
+<h6 id="example-of-replaying">Example of replaying:</h6>
+<pre><code class="language-javascript" id="code42">A.replayCustomTagsByName('custom-box');
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code42')">Copy</button>
+<h3 id="a-script"><code id="code43">&lt;a-script&gt;</code></h3>
+<p>The <code id="code44">&lt;a-script&gt;</code> tag is a customized replacement for the native <code id="code45">&lt;script&gt;</code> tag, providing additional functionality specific to a.js. It allows developers to run JavaScript code within a controlled context while integrating deeply with a.js features.</p>
+<h4 id="features-2">Features:</h4>
+<ul>
+<li>Supports scoped execution, reducing the risk of global variable pollution.</li>
+<li>Offers access to special variables <code id="code46">currentScript</code> and <code id="code47">currentElement</code> for targeting the relevant script and element.</li>
+<li>Compatible with the <code id="code48">closure</code> attribute to encapsulate the script within a closure.</li>
+</ul>
+<h4 id="syntax-4">Syntax:</h4>
+<pre><code class="language-html" id="code49">&lt;a-script&gt;
+  // JavaScript code here
+&lt;/a-script&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code49')">Copy</button>
+<h4 id="example-2">Example:</h4>
+<pre><code class="language-html" id="code50">&lt;a-script&gt;
+  console.log('Executed within &lt;a-script&gt;');
+  currentElement.innerHTML = 'Hello from a.js';
+&lt;/a-script&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code50')">Copy</button>
+<hr>
+
+
+
+
+
+
+<h2 id="special-variables-and-behaviors-1">Special Variables and Behaviors</h2>
+<h3 id="currentscript"><code id="code51">currentScript</code></h3>
+<p><code id="code52">currentScript</code> refers to the <code id="code53">&lt;script&gt;</code> tag of the custom a.js tag containing the variable. This variable allows direct access to the running script element, enabling dynamic manipulation or introspection.</p>
+<h4 id="example-3">Example:</h4>
+<pre><code class="language-html" id="code54">&lt;a-script&gt;
+  console.log('The script:', currentScript);
+&lt;/a-script&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code54')">Copy</button>
+<h3 id="currentelement"><code id="code55">currentElement</code></h3>
+<p><code id="code56">currentElement</code> provides a reference to the DOM element targeted by the custom or <code id="code57">&lt;a-xxxx&gt;</code> a.js tag. This variable is essential for modifying the target element dynamically.</p>
+<h4 id="example-4">Example:</h4>
+<pre><code class="language-html" id="code58">&lt;a-closure&gt;
+  currentElement.innerHTML = 'Hello from currentElement!';
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code58')">Copy</button>
+<h3 id="--and-">(...), {(...)} and ${...}</h3>
+<p>Inside an <code id="code59">&lt;a-xxxx&gt;&lt;/a-xxxx&gt;</code> element, you can write any html tag between parenthesis <code id="code60">(</code> and <code id="code61">)</code> and before the runtime it will be converted to a javascript code generating the corresponding HTMLElement in the context of the <code id="code62">&lt;a-xxxx&gt;&lt;/a-xxxx&gt;</code> element.</p>
+<ul>
+<li><code id="code63">(...)</code> generates the element and returns it.</li>
+</ul>
+<h4 id="example-5">Example:</h4>
+<pre><code class="language-html" id="code64">&lt;a-closure&gt;
+  currentElement.appendChild(&lt;b&gt;Bold text&lt;/b&gt;)
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code64')">Copy</button>
+<p>will append a <code id="code65">&lt;b&gt;</code> containing a text node "Bold text" to currentElement</p>
+<pre><code class="language-html" id="code66">&lt;a-closure&gt;
+  document.body.appendChild(&lt;b&gt;Bold text&lt;/b&gt;)
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code66')">Copy</button>
+<p>will append a <code id="code67">&lt;b&gt;</code> containing a text node "Bold text" to the body</p>
+<ul>
+<li><code id="code68">{(...)}</code> generates the element and append it to currentElement.</li>
+</ul>
+<h4 id="example-6">Example:</h4>
+<pre><code class="language-html" id="code69">&lt;a-closure&gt;
+  {(&lt;b&gt;Bold text&lt;/b&gt;)}
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code69')">Copy</button>
+<p>will append a <code id="code70">&lt;b&gt;</code> containing a text node "Bold text" to currentElement</p>
+<ul>
+<li><code id="code71">${...}</code> leverages JavaScript template litterals to allow you to display the value of any JavaScript variable or expression evaluated in the context inside <code id="code72">(...)</code> or <code id="code73">{(...)}</code>. Additionnaly, if <code id="code74">${...}</code> refers to a watched variable, the corersponding content will become reactive.</li>
+</ul>
+<pre><code class="language-html" id="code75">&lt;a-closure&gt;
+  &lt;let&gt;
+  global watched bold.text;
+  &lt;/let&gt;
+  bold.text = "Bold text"
+  {(&lt;b&gt;${bold.text}&lt;/b&gt;)}
+  bold.text = "reactive bold text"
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code75')">Copy</button>
+<p>Every time bold.text is updated to a new value, the text of the text node inside the <code id="code76">&lt;b&gt;</code> tag will be updated to this new value too.</p>
+<hr>
+
+
+
+<h2 id="utility-functions">Utility Functions</h2>
+<h3 id="watchcallbackonokcallbackonerrorcallback">watch(callback[,onOkCallback][,onErrorCallback])</h3>
+<ul>
+<li>Tracks changes to reactive variables and executes <code id="code77">callback</code> when changes occur. Nested watch calls optimize dependency tracking. <code id="code78">onOkCallback</code>, if provided, gets called with the result of <code id="code79">callback</code> each time it is called. <code id="code80">onErrorCallback</code> is called when a call to <code id="code81">callback</code> throws an error.</li>
+<li>returns <code id="code82">{result}</code> where result is what <code id="code83">callback</code> returns. The result property gets updated whenever <code id="code84">callback</code> is called.</li>
+<li>You can set the <code id="code85">suspend</code> property of the returned object to true to pause the calls to callback on changes.</li>
+</ul>
+<h4 id="example-7">Example:</h4>
+<pre><code class="language-html" id="code86">&lt;a-closure&gt;
+  &lt;let&gt;
+    global watched app.data.value;
+  &lt;/let&gt;
+  app.data.value = 42;
+
+  watch(() =&gt; {
+    console.log('Value updated:', app.data.value);
+  });
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code86')">Copy</button>
+<h3 id="unwatchbase">unwatch(base)</h3>
+<p>Creates a static (non-reactive) copy of the base object of a watched variable.</p>
+<h4 id="example-8">Example:</h4>
+<pre><code class="language-html" id="code87">&lt;a-closure&gt;
+  &lt;let&gt;
+    global watched app.data.value;  //app is the base object
+  &lt;/let&gt;
+  app.data.value = 42;
+
+  const staticApp = unwatch(app);
+  watch(() =&gt; {
+    console.log('Value updated:', staticApp.data.value); // Static value that does not trigger reactivity
+  });
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code87')">Copy</button>
+<h3 id="exposefunction-name">expose(function[, name])</h3>
+<p>Attaches a function to currentElement.A with a specified name.</p>
+<h4 id="example-9">Example:</h4>
+<pre><code class="language-html" id="code88">&lt;a-closure&gt;
+  expose(function sayHello() {
+    console.log('Hello from exposed function!');
+  }, 'sayHello');
+
+  currentElement.A.sayHello();
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code88')">Copy</button>
+<h3 id="injectfunctioncallback">injectFunction(callback)</h3>
+<p>Wraps a function to execute within the context of the current script and element.</p>
+<h4 id="example-10">Example:</h4>
+<pre><code class="language-html" id="code89">&lt;script&gt;
+  const injected = element.A.injectFunction(() =&gt; {
+    console.log('Injected function context:', currentElement);
+  });
+
+  injected();
+&lt;/script&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code89')">Copy</button>
+
+<br>
+<br>
+<my-link><a href="docglobalmethods.html" class="pure-button pure-button-primary">> Global methods </a></my-link> 
+
+</my-page>
+<!--AUnwanted-->
+</body>
+</html>
+<!--/AUnwanted-->

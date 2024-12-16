@@ -1,0 +1,22 @@
+
+a:importtarget {
+	display: none;
+}
+body > my-page {
+  opacity: 1;
+  animation: fadeIn 0.2s 1s;
+}
+@starting-style {
+	body > my-page {
+	  opacity: 0;
+	}
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

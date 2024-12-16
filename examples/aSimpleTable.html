@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Simple reactive table demo</title>
+<script src="../a.js">addSourceMaps:false</script>
+<style>
+	a {
+		cursor: pointer;
+	}
+</style>
+</head>
+<body>
+	<div>
+		<a-closure>
+			{(<button onclick="create(1)">create 1</button>)}
+			
+			
+			{(<button onclick="create(10)">create 10</button>)}
+
+			{(<button onclick="g.arr[0]='changed title'">Change first line title</button>)}
+			
+			{(<button onclick="g.arr.pop()">pop</button>)}
+			
+			{(<button onclick="g.arr.shift()">shift</button>)}
+			
+			let table = {(=<table><tbody></tbody></table>)}
+			let tbody = table.firstChild
+			Lc = ["pretty", "large", "big", "small", "tall", "short", "long", "handsome", "plain", "quaint", "clean", "elegant", "easy", "angry", "crazy", "helpful", "mushy", "odd", "unsightly", "adorable", "important", "inexpensive", "cheap", "expensive", "fancy"]
+      		Oc = ["red", "yellow", "blue", "green", "pink", "brown", "purple", "brown", "white", "black", "orange"]
+      	 	Dc = ["table", "chair", "house", "bbq", "desk", "car", "pony", "cookie", "sandwich", "burger", "pizza", "mouse", "keyboard"]
+
+			<let>
+				local watched g
+			</let>
+			let count = 6;
+			g.arr = []
+			function create(nb) {
+				let ts1 = Date.now()
+				for (let i=0;i < nb;i++) {
+					let i1 = Math.floor(Math.random()*Lc.length)
+					let i2 = Math.floor(Math.random()*Oc.length)
+					let i3 = Math.floor(Math.random()*Dc.length)
+					g.arr.push(Lc[i1] + " " + Oc[i2] + " " + Dc[i3])
+				}	
+			}
+			let counter = 0;
+			<forEachOf g.arr="val,index">
+				let row = (<a:tr key="${forEach}"><a:td>${forEach}</a:td><a:td>${g.arr[index]}</a:td><a:td><a onclick="g.arr.splice(${forEach},1)">X</a></a:td></a:tr>)
+				if (row.parentElement!=tbody) tbody.appendChild(row)
+			</forEachOf>
+			
+			
+		</a-closure>
+	</div>
+</body>
+</html>

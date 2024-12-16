@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--AUnwanted-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a.js - Modular, Reactive, Empowering</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css">
+<link rel="stylesheet" href="css/styles.css">
+<script a-extension src="a-spaext.js"></script>
+<script src="importa.js"></script>
+</head>
+<body>
+	<layout>
+<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+	</layout>
+<!--/AUnwanted-->
+<my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
+<h3 id="scoped-variables">Scoped Variables</h3>
+<p>Scoped variables are declared inside an <code id="code174">&lt;a-xxxx&gt;&lt;/a-xxxx&gt;</code> element in a <code id="code175">&lt;let&gt;&lt;/let&gt;</code> block, and initialized after the block. 
+The variable name must contain a dot <code id="code176">.</code> or be an object if the name doesn't contain a dot.
+Scoped variables in a.js allow developers to manage reactivity at different levels:</p>
+<h4 id="types-of-scoped-variables">Types of Scoped Variables</h4>
+<ol>
+<li><p><strong>Global Scoped Variables</strong></p>
+<ul>
+<li>Accessible across all <code id="code177">&lt;a-xxxx&gt;</code> elements.</li>
+<li>Declared with <code id="code178">global</code>.</li>
+<li>Example:<pre><code class="language-html" id="code179">&lt;let&gt;
+  global g.variable;
+&lt;/let&gt;
+g.variable = "value"
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code179')">Copy</button>
+</li>
+</ul>
+</li>
+<li><p><strong>Namespace Scoped Variables</strong></p>
+<ul>
+<li>Shared only among elements with the same <code id="code180">namespace</code> attribute value.</li>
+<li>Declared with <code id="code181">nsGlobal</code>.</li>
+<li>Example:<pre><code class="language-html" id="code182">&lt;let&gt;
+  nsGlobal ns.variable;
+&lt;/let&gt;
+ns.variable = ["value1",2,3]
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code182')">Copy</button>
+</li>
+</ul>
+</li>
+<li><p><strong>Descendant Scoped Variables</strong></p>
+<ul>
+<li>Shared among elements that are descendants of the element.</li>
+<li>Declared with <code id="code183">dGlobal</code>. Usually in a <code id="code184">&lt;a-tagDef forTag="my-ancestor"&gt;</code> element</li>
+<li>Example:<pre><code class="language-html" id="code185">&lt;let&gt;
+  dGlobal d.variable;
+&lt;/let&gt;
+d.variable = { name : "value" }
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code185')">Copy</button>
+</li>
+</ul>
+</li>
+<li><p><strong>Ancestor Scoped Variables</strong></p>
+<ul>
+<li>Looks for variables declared in ancestor elements and shares them with child elements.</li>
+<li>Declared with <code id="code186">aGlobal</code>. Usually in a <code id="code187">&lt;a-tagDef forTag="my-descendant"&gt;</code> element</li>
+<li>Example:<pre><code class="language-html" id="code188">&lt;let&gt;
+  aGlobal d.variable;
+&lt;/let&gt;
+//here, in the scope, d.variable has the value { name : "value" } as long as the element in inside a `&lt;my-ancestor&gt;&lt;my-ancestor&gt;`
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code188')">Copy</button>
+</li>
+</ul>
+</li>
+<li><p><strong>Local Scoped Variables</strong></p>
+<ul>
+<li>Restricted to a single <code id="code189">&lt;a-xxxx&gt;</code> element.</li>
+<li>Declared with <code id="code190">local</code>.</li>
+<li>Example:<pre><code class="language-html" id="code191">&lt;let&gt;
+  local l.variable;
+&lt;/let&gt;
+l.variable = 3
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code191')">Copy</button>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="example-usage">Example Usage</h4>
+<pre><code class="language-html" id="code192">&lt;a-closure&gt;
+  &lt;let&gt;
+    global g.value;
+    nsGlobal ns.value;
+    dGlobal d.value;
+    aGlobal a.value;
+    local l.value;
+  &lt;/let&gt;
+
+  watch(() =&gt; {
+    console.log('Global:', g.value);
+    console.log('Namespace:', ns.value);
+    console.log('Descendant:', d.value);
+    console.log('Ancestor:', a.value);
+    console.log('Local:', l.value);
+  });
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code192')">Copy</button>
+<h4 id="initialization-of-variables">Initialization of variables</h4>
+<p>Initialize the variables after the closing <code id="code193">&lt;/let&gt;</code>of the declaration.</p>
+<h4 id="watched-variables">Watched variables</h4>
+<p>Any variable having the keyword <code id="code194">watched</code> between the type (<code id="code195">global</code>,...) and it's name.</p>
+<h4 id="example-11">Example</h4>
+<pre><code class="language-html" id="code196">&lt;a-closure&gt;
+  &lt;let&gt;
+    global watched global.value;
+  &lt;/let&gt;
+  global.value = 42;
+&lt;/a-closure&gt;
+</code></pre><button class="pure-button" onclick="copyCode(this, 'code196')">Copy</button>
+<hr>
+<my-link><a href="docadvancedfuncs.html" class="pure-button pure-button-primary">> Advanced functionalities</a></my-link>
+
+</my-page>
+<!--AUnwanted-->
+</body>
+</html>
+<!--/AUnwanted-->
