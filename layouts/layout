@@ -8,15 +8,15 @@
 	});
 </script>
 	    <header class="pure-menu pure-menu-horizontal header">
-        <my-link><a href="index.html" class="pure-menu-heading logo">
+        <my-link><a href="index" class="pure-menu-heading logo">
             <img src="images/logo/a-js-logo.png" alt="a.js Logo" class="logo-img"> <span class="logo-text">A.JS</span>
         </a></my-link>
         <div class="menu-container">
             <button class="pure-button menu-toggle">☰</button>
             <ul class="pure-menu-list">
-                <li class="pure-menu-item"><my-link><a href="featuresindex.html" class="pure-menu-link">Features</a></my-link></li>
-                <li class="pure-menu-item"><my-link><a href="docoverview.html" class="pure-menu-link">Documentation</a></my-link></li>
-                <li class="pure-menu-item"><my-link><a href="examplesindex.html" class="pure-menu-link">Examples</a></my-link></li>
+                <li class="pure-menu-item"><my-link><a href="featuresindex" class="pure-menu-link">Features</a></my-link></li>
+                <li class="pure-menu-item"><my-link><a href="docoverview" class="pure-menu-link">Documentation</a></my-link></li>
+                <li class="pure-menu-item"><my-link><a href="examplesindex" class="pure-menu-link">Examples</a></my-link></li>
                 <li class="pure-menu-item"><a href="https://github.com/a-js-org/a-js" class="pure-menu-link" target="_blank">Github</a></li>
             </ul>
         </div>
@@ -25,7 +25,7 @@
 <div id="main"><my-page singleton="page">Default page</my-page></div></menuandpage></span>)}
 </a-tagdef>
 <a-tagdef fortag="my-header">
-	<import src="../tags/my-header.html" type="text/html"></import>
+	<import src="../tags/my-header" type="text/html"></import>
 </a-tagdef>
 <a-tagdef fortag="my-menu">
 	<import src="../tags/my-menu.tagdef"></import>

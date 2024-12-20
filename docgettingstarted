@@ -13,7 +13,7 @@
 </head>
 <body>
 	<layout>
-<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<a-closure><import src="layouts/layout" type="text/html"></import></a-closure>
 	</layout>
 <!--/AUnwanted-->
 <my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
@@ -85,7 +85,7 @@
     <strong>Tip:</strong> Combine <code>&lt;a-closure&gt;</code> and <code>watched</code> variables for highly interactive and modular web components.
 </div>
 
-<my-link><a href="doca-elements.html" class="pure-button pure-button-primary">> Custom tags </a></my-link> 
+<my-link><a href="doca-elements" class="pure-button pure-button-primary">> Custom tags </a></my-link> 
 
 </my-page>
 <!--AUnwanted-->

@@ -11,7 +11,7 @@
 <script src="importa.js"></script>
 </head>
 <body>
-<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<a-closure><import src="layouts/layout" type="text/html"></import></a-closure>
 <!--/AUnwanted-->
 <my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
 	<h3><strong>Strengths of <code>a.js</code> as a Flexwork</strong></h3>
@@ -34,7 +34,7 @@
 <ol>
 	<li><p><strong>Reactive Components</strong>:</p>
 		<ul>
-			<li>Combines manual and declarative reactive list implementations (e.g., <code>awatchloop3.html</code> and <code>aforEachOf.html</code>).</li>
+			<li>Combines manual and declarative reactive list implementations (e.g., <code>awatchloop3</code> and <code>aforEachOf</code>).</li>
 			<li>Real-time updates and scoped contexts ensure flexibility.</li>
 		</ul>
 	</li>
@@ -54,7 +54,7 @@
 <hr><h3><strong>Summary</strong></h3>
 <p><code>a.js</code> excels as a Flexwork by offering a powerful combination of declarative simplicity, dynamic reactivity, and advanced browser API integration. Its strengths make it ideal for projects requiring both flexibility and modularity, while its transparent approach encourages developers to master foundational programming concepts.</p>
 
-<my-link><a href="docoverview.html" class="pure-button pure-button-primary">> Overview </a></my-link>
+<my-link><a href="docoverview" class="pure-button pure-button-primary">> Overview </a></my-link>
 </my-page>
 <!--AUnwanted-->
 </body>

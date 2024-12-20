@@ -11,13 +11,13 @@
 <script src="importa.js"></script>
 </head>
 <body>
-<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<a-closure><import src="layouts/layout" type="text/html"></import></a-closure>
 <!--/AUnwanted-->
 <my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
 	<section id="features" class="features-section">
     <div class="container">
         <h2 class="features-title">Why Choose <span>a.js</span>?</h2>
-        <p class="features-description">a.js is the ultimate JavaScript <my-link><a href="featuresflexworkmanifesto.html">flexwork</a></my-link> designed to empower developers with flexibility, modularity, and transparency. Explore the features that make it stand out:</p>
+        <p class="features-description">a.js is the ultimate JavaScript flexwork designed to empower developers with flexibility, modularity, and transparency. Explore the features that make it stand out:</p>
         <div class="pure-g">
             <div class="pure-u-1 pure-u-md-1-3 feature">
                 <h3>📦 Lightweight & Modular</h3>
@@ -39,10 +39,13 @@
                 <h3>⚡ Transparent Magic</h3>
                 <p>Enjoy high-level features with escape hatches at every level. Use as much or as little abstraction as your project needs.</p>
             </div>
+            <div class="pure-u-1 pure-u-md-1-3 feature">
+                <h3>🚀 Built for Performance</h3>
+                <p>Optimized for performance, a.js minimizes overhead and maximizes efficiency, even in complex applications.</p>
+            </div>
         </div>
     </div>
 </section>
-<my-link><a href="featuresflexworkmanifesto.html" class="pure-button pure-button-primary">> A flexwork? What is that?</a></my-link>
 </my-page>
 <!--AUnwanted-->
 </body>

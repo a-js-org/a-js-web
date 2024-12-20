@@ -13,7 +13,7 @@
 </head>
 <body>
 	<layout>
-<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<a-closure><import src="layouts/layout" type="text/html"></import></a-closure>
 	</layout>
 <!--/AUnwanted-->
 <my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
@@ -90,7 +90,7 @@
     <li><strong>Dynamic Keyed Elements:</strong> Optimize updates for elements inside reactive loops by using unique keys.</li>
     <li><strong>Custom Event Handling:</strong> Automatically attach reactive event listeners to DOM elements created with a.js.</li>
 </ul>
-<my-link><a href="docgettingstarted.html" class="pure-button pure-button-primary">> Getting started </a></my-link> 
+<my-link><a href="docgettingstarted" class="pure-button pure-button-primary">> Getting started </a></my-link> 
 </my-page>
 <!--AUnwanted-->
 </body>

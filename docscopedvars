@@ -13,7 +13,7 @@
 </head>
 <body>
 	<layout>
-<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<a-closure><import src="layouts/layout" type="text/html"></import></a-closure>
 	</layout>
 <!--/AUnwanted-->
 <my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
@@ -116,7 +116,7 @@ l.variable = 3
 &lt;/a-closure&gt;
 </code></pre><button class="pure-button" onclick="copyCode(this, 'code196')">Copy</button>
 <hr>
-<my-link><a href="docadvancedfuncs.html" class="pure-button pure-button-primary">> Advanced functionalities</a></my-link>
+<my-link><a href="docadvancedfuncs" class="pure-button pure-button-primary">> Advanced functionalities</a></my-link>
 
 </my-page>
 <!--AUnwanted-->
