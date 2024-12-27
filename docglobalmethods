@@ -13,7 +13,7 @@
 </head>
 <body>
 	<layout>
-<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<a-closure><import src="layouts/layout" type="text/html"></import></a-closure>
 	</layout>
 <!--/AUnwanted-->
 <my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
@@ -95,7 +95,7 @@ console.log(stateDump);
 <li><strong><code id="code126">onloaded</code></strong> (Function, optional): A callback function executed after the import is complete.</li>
 </ul>
 <h4 id="syntax-10">Syntax:</h4>
-<pre><code class="language-javascript" id="code127">A.importIn(currentElement, './fragment.html', 'html', true, () =&gt; {
+<pre><code class="language-javascript" id="code127">A.importIn(currentElement, './fragment', 'html', true, () =&gt; {
   console.log('Import completed.');
 });
 </code></pre><button class="pure-button" onclick="copyCode(this, 'code127')">Copy</button>
@@ -265,7 +265,7 @@ console.log(text);
 console.log(source);
 </code></pre><button class="pure-button" onclick="copyCode(this, 'code173')">Copy</button>
 <hr>
-<my-link><a href="docscopedvars.html" class="pure-button pure-button-primary">> Scoped variables</a></my-link> 
+<my-link><a href="docscopedvars" class="pure-button pure-button-primary">> Scoped variables</a></my-link> 
 </my-page>
 <!--AUnwanted-->
 </body>

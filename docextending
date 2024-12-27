@@ -13,7 +13,7 @@
 </head>
 <body>
 	<layout>
-<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<a-closure><import src="layouts/layout" type="text/html"></import></a-closure>
 	</layout>
 <!--/AUnwanted-->
 <my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
@@ -204,7 +204,7 @@ document.currentScript._AExtension = {
 <li><strong>Use Namespaces</strong>: Scope variables and keys within namespaces to avoid conflicts in dynamic contexts.</li>
 </ol>
 <hr>
-<my-link><a href="examplesindex.html" class="pure-button pure-button-primary">> Examples</a></my-link>
+<my-link><a href="examplesindex" class="pure-button pure-button-primary">> Examples</a></my-link>
 </my-page>
 <!--AUnwanted-->
 </body>

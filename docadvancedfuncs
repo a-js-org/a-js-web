@@ -13,7 +13,7 @@
 </head>
 <body>
 	<layout>
-<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<a-closure><import src="layouts/layout" type="text/html"></import></a-closure>
 	</layout>
 <!--/AUnwanted-->
 <my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
@@ -109,7 +109,7 @@
 <pre><code class="language-html" id="code228">&lt;a-closure&gt;
   &lt;import src="./styles/main.css" type="css"&gt;&lt;/import&gt; //import the styles in main.css in a way that only applies them to the children of currentElement
   &lt;import src="./scripts/utils.js" type="javascript"&gt;&lt;/import&gt; //replace this &lt;import&gt;&lt;/import&gt; tag by the text of the ./scripts/utils.js file. If this text contains an import tag, it will be resolved too.
-  &lt;import src="./components/header.html" type="html"&gt;&lt;/import&gt; //import the content of ./components/header.html as child nodes of currentElement.
+  &lt;import src="./components/header" type="html"&gt;&lt;/import&gt; //import the content of ./components/header as child nodes of currentElement.
 &lt;/a-closure&gt;
 </code></pre><button class="pure-button" onclick="copyCode(this, 'code228')">Copy</button>
 <hr>
@@ -137,7 +137,7 @@ This means it (usually) makes no sense to write something like</p>
 <h3 id="dynamic-resource-loading">Dynamic Resource Loading</h3>
 <p>Dynamic resource loading can be accomplished using <code id="code237">A.importIn</code>, which programmatically loads resources into a specified element.</p>
 <h4 id="example-16">Example</h4>
-<pre><code class="language-javascript" id="code238">A.importIn(currentElement, './html/layout.html', "html");
+<pre><code class="language-javascript" id="code238">A.importIn(currentElement, './html/layout', "html");
 </code></pre><button class="pure-button" onclick="copyCode(this, 'code238')">Copy</button>
 <hr>
 <h2 id="practical-use-cases">Practical Use Cases</h2>
@@ -178,7 +178,7 @@ This means it (usually) makes no sense to write something like</p>
 <hr>
 <p>By using the <code id="code245">&lt;import&gt;</code> tag effectively, developers can create highly modular, dynamic, and maintainable web applications with a.js.</p>
 <hr>
-<my-link><a href="docreactivestate.html" class="pure-button pure-button-primary">> Reactive state management</a></my-link>
+<my-link><a href="docreactivestate" class="pure-button pure-button-primary">> Reactive state management</a></my-link>
 </my-page>
 <!--AUnwanted-->
 </body>

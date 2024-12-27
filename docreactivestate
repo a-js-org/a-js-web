@@ -13,7 +13,7 @@
 </head>
 <body>
 	<layout>
-<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<a-closure><import src="layouts/layout" type="text/html"></import></a-closure>
 	</layout>
 <!--/AUnwanted-->
 <my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
@@ -265,7 +265,7 @@
 </ol>
 <p>By understanding and using these patterns, developers can build highly interactive and maintainable applications with a.js.</p>
 <hr>
-<my-link><a href="docdebugging.html" class="pure-button pure-button-primary">> Debugging</a></my-link>
+<my-link><a href="docdebugging" class="pure-button pure-button-primary">> Debugging</a></my-link>
 </my-page>
 <!--AUnwanted-->
 </body>

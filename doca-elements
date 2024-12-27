@@ -13,7 +13,7 @@
 </head>
 <body>
 	<layout>
-<a-closure><import src="layouts/layout.html" type="text/html"></import></a-closure>
+<a-closure><import src="layouts/layout" type="text/html"></import></a-closure>
 	</layout>
 <!--/AUnwanted-->
 <my-page singleton="page" singletonreplace="existing" waitfor='["my-layout","#main","my-page"]'>
@@ -241,7 +241,7 @@
 
 <br>
 <br>
-<my-link><a href="docglobalmethods.html" class="pure-button pure-button-primary">> Global methods </a></my-link> 
+<my-link><a href="docglobalmethods" class="pure-button pure-button-primary">> Global methods </a></my-link> 
 
 </my-page>
 <!--AUnwanted-->
