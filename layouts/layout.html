@@ -63,6 +63,11 @@
 		}
 	}
 	if (route) {
+		if (location.hostname.indexOf("a-js.org") < 0) {
+			if (!route.endsWith(".html")&&route.indexOf(".") < 0) {
+				route += ".html"
+			}
+		}
 		currentElement.addEventListener("click",(evt) => {
 			evt.preventDefault();
 			evt.stopPropagation();
