@@ -34,11 +34,18 @@
 	</let>
 	watch(function() {
 		if (menu.curRoute) {
+			let curRoute = menu.curRoute;
+			let curRoute2 = curRoute;
+			if (curRoute2.endsWith(".html")) {
+				curRoute2 = curRoute2.substring(0,curRoute2.length-".html".length);
+			} else {
+				curRoute2 += ".html"
+			}
 			let selected = currentElement.querySelectorAll(".pure-menu-selected")
 			for (el of selected) {
 				el.classList.remove("pure-menu-selected")
 			}
-			let curRouteElem = currentElement.querySelector('[route="'+menu.curRoute+'"],[href="'+menu.curRoute+'"]')
+			let curRouteElem = currentElement.querySelector('[route="'+curRoute+'"],[href="'+curRoute+'"],[route="'+curRoute2+'"],[href="'+curRoute2+'"]')
 			if (curRouteElem) {
 				do {
 					curRouteElem.classList.add("pure-menu-selected")
